@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000000;
+}
+
+#canvas_FSME {
+    border: solid thin magenta;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+#canvas_Tularämie {
+    border: solid thin magenta;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+#canvas_Borreliose {
+    border: solid thin magenta;
+    margin: 1rem;
+    padding: 0.5rem;
+}
