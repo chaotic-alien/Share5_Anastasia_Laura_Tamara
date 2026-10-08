@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BAG-Infoportal übertragbare Krankheiten</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="js/p5.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    
+  </head>
+  <body>
+  <header class="site-header">
+    <!-- Dunkelblaue obere Leiste -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <span>Alle Schweizer Bundesbehörden</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="top-bar-right">
+        <span>DE</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </div>
+
+    <!-- Weiße Haupt-Headerleiste -->
+    <div class="main-bar">
+      <a href="#" class="brand-container">
+       <img src="SVG/BundLogo.svg" alt="Bundeslogo" class="logo-desktop"/>
+      <img src="SVG/BundLogo-mobile.svg" alt="Bundeslogo" class="logo-mobile"/>
+        <div class="brand-divider"></div>
+
+       <div class="brand-text">
+  <span class="brand-title">
+    <span class="full-text">Bundesamt für Gesundheit BAG</span>
+    <span class="short-text">BAG</span>
+  </span>
+  <span class="brand-subtitle">
+    <span class="full-text">Infoportal übertragbare Krankheiten</span>
+    <span class="short-text">IDD</span>
+  </span>
+</div>
+      </a>
+
+      <!-- Menü-Button (Burger-Icon) -->
+      <button class="menu-button" aria-label="Menü öffnen">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hauptinhalt -->
+  <section class="Hauptinhalt">
+    <div class="Titel">
+      Zeckenübertragene Krankheiten
+    </div>
+<!-- 1.> Abschnitt Zeckentext-->
+      <div>
+        <p>
+          Zecken können Krankheitserreger wie das FSME-Virus sowie Borreliose-
+          und Tularämie-Bakterien übertragen, die zu schweren Erkrankungen
+          führen können. Obwohl das Infektionsrisiko vor allem im Sommer hoch
+          ist, treten Ansteckungen das ganze Jahr über auf.
+        </p>
+</div>
+
+<!-- Buttons für die Krankheiten -->
+<div class="Buttons-Krankheiten">
+  
+<!-- BUTTON 1: FSME -->
+<div 
+  class="ButtonsK"
+  onclick="window.location.href='FSME.html'"
+>
+
+  <div class="Krankheit-FSME">
+    FSME
+  </div>
+
+  <div class="Bennenung-Trend-FSME">
+    zunehmend
+  </div>
+
+ <div class="Trend-Icon-FSME">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="trend-arrow">
+    <path d="M416 224C398.3 224 384 209.7 384 192C384 174.3 398.3 160 416 160L576 160C593.7 160 608 174.3 608 192L608 352C608 369.7 593.7 384 576 384C558.3 384 544 369.7 544 352L544 269.3L374.6 438.7C362.1 451.2 341.8 451.2 329.3 438.7L224 333.3L86.6 470.6C74.1 483.1 53.8 483.1 41.3 470.6C28.8 458.1 28.8 437.8 41.3 425.3L201.3 265.3C213.8 252.8 234.1 252.8 246.6 265.3L352 370.7L498.7 224L416 224z"/>
+  </svg>
+</div>
+
+  <!-- Kleiner Button für externes Meldesystem -->
+  <a
+    href="https://www.idd.bag.admin.ch/de/survey-systems/oblig"
+    target="_blank"
+    class="Meldesystem-FSME"
+    onclick="event.stopPropagation();"
+  >
+    <span>Oblig</span>
+    <span class="Pfeil">→</span>
+  </a>
+
+</div>
+
+<!-- Button 2: Tularämie -->
+
+<div 
+  class="ButtonsK"
+  onclick="window.location.href='Tularaemie.html'"
+>
+
+  <div class="Krankheit-Tularaemie">
+    Tularämie
+  </div>
+
+  <div class="Bennenung-Trend-Tularaemie">
+    zunehmend
+  </div>
+
+ <div class="Trend-Icon-Tularaemie">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="trend-arrow">
+    <path d="M416 224C398.3 224 384 209.7 384 192C384 174.3 398.3 160 416 160L576 160C593.7 160 608 174.3 608 192L608 352C608 369.7 593.7 384 576 384C558.3 384 544 369.7 544 352L544 269.3L374.6 438.7C362.1 451.2 341.8 451.2 329.3 438.7L224 333.3L86.6 470.6C74.1 483.1 53.8 483.1 41.3 470.6C28.8 458.1 28.8 437.8 41.3 425.3L201.3 265.3C213.8 252.8 234.1 252.8 246.6 265.3L352 370.7L498.7 224L416 224z"/>
+  </svg>
+</div>
+
+  <!-- Kleiner Button für externes Meldesystem -->
+  <a
+    href="https://www.idd.bag.admin.ch/de/survey-systems/oblig"
+    target="_blank"
+    class="Meldesystem-Tularaemie"
+    onclick="event.stopPropagation();"
+  >
+    <span>Oblig</span>
+    <span class="Pfeil">→</span>
+  </a>
+
+
+
+</div>
+<!-- Button 3: Borreliose -->
+<div 
+  class="ButtonsK"
+  onclick="window.location.href='FSME.html'"
+>
+
+  <div class="Krankheit-Borreliose">
+    Borreliose
+  </div>
+
+  <div class="Bennenung-Trend-Borreliose">
+    zunehmend
+  </div>
+
+ <div class="Trend-Icon-Borreliose">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="trend-arrow">
+    <path d="M416 224C398.3 224 384 209.7 384 192C384 174.3 398.3 160 416 160L576 160C593.7 160 608 174.3 608 192L608 352C608 369.7 593.7 384 576 384C558.3 384 544 369.7 544 352L544 269.3L374.6 438.7C362.1 451.2 341.8 451.2 329.3 438.7L224 333.3L86.6 470.6C74.1 483.1 53.8 483.1 41.3 470.6C28.8 458.1 28.8 437.8 41.3 425.3L201.3 265.3C213.8 252.8 234.1 252.8 246.6 265.3L352 370.7L498.7 224L416 224z"/>
+  </svg>
+</div>
+
+  <!-- Kleiner Button für externes Meldesystem -->
+  <a
+    href="https://www.idd.bag.admin.ch/de/survey-systems/sentinella"
+    target="_blank"
+    class="Meldesystem-Borreliose"
+    onclick="event.stopPropagation();"
+  >
+    <span>Sentinella</span>
+    <span class="Pfeil">→</span>
+  </a>
+
+
+</div>
+     
+
+      <!-- 2. Abschnitt Situationsbeurteilung -->
+<section>
+        <div class="Ueberschrift">Situationsbeurteilung</div>
+         <p>
+          Die Zeckensaison neigt sich dem Ende zu und die Fälle von durch Zecken übertragenen Krankheiten sind rückläufig.
+        </p>
+      </section>
+
+      <!-- 3. Abschnitt Weitere Infos -->
+      <section id="content">
+        <h2>Weitere Infos</h2>
+      <a href="https://www.bag.admin.ch/de/fruehsommer-meningoenzephalitis-fsme">
+  <div class="KrankheitLink">
+    <div>FSME</div>
+    <div>  <svg viewBox="0 0 640 640">
+        <path d="M384 64C366.3 64 352 78.3 352 96C352 113.7 366.3 128 384 128L466.7 128L265.3 329.4C252.8 341.9 252.8 362.2 265.3 374.7C277.8 387.2 298.1 387.2 310.6 374.7L512 173.3L512 256C512 273.7 526.3 288 544 288C561.7 288 576 273.7 576 256L576 96C576 78.3 561.7 64 544 64L384 64zM144 160C99.8 160 64 195.8 64 240L64 496C64 540.2 99.8 576 144 576L400 576C444.2 576 480 540.2 480 496L480 416C480 398.3 465.7 384 448 384C430.3 384 416 398.3 416 416L416 496C416 504.8 408.8 512 400 512L144 512C135.2 512 128 504.8 128 496L128 240C128 231.2 135.2 224 144 224L224 224C241.7 224 256 209.7 256 192C256 174.3 241.7 160 224 160L144 160z"/>
+    </svg></div>
+  </div>
+</a>
+
+<div class="Trennlinie"></div>
+
+        <a href="https://www.bag.admin.ch/de/tularaemie-hasenpest">
+  <div class="KrankheitLink">
+    <div>Tularämie</div>
+    <div>  <svg viewBox="0 0 640 640">
+        <path d="M384 64C366.3 64 352 78.3 352 96C352 113.7 366.3 128 384 128L466.7 128L265.3 329.4C252.8 341.9 252.8 362.2 265.3 374.7C277.8 387.2 298.1 387.2 310.6 374.7L512 173.3L512 256C512 273.7 526.3 288 544 288C561.7 288 576 273.7 576 256L576 96C576 78.3 561.7 64 544 64L384 64zM144 160C99.8 160 64 195.8 64 240L64 496C64 540.2 99.8 576 144 576L400 576C444.2 576 480 540.2 480 496L480 416C480 398.3 465.7 384 448 384C430.3 384 416 398.3 416 416L416 496C416 504.8 408.8 512 400 512L144 512C135.2 512 128 504.8 128 496L128 240C128 231.2 135.2 224 144 224L224 224C241.7 224 256 209.7 256 192C256 174.3 241.7 160 224 160L144 160z"/>
+    </svg></div>
+  </div>
+</a>
+
+        <div class="Trennlinie"></div>
+
+
+        <a href="https://www.bag.admin.ch/de/borreliose">
+  <div class="KrankheitLink">
+    <div>Borreliose</div>
+    <div>  <svg viewBox="0 0 640 640">
+        <path d="M384 64C366.3 64 352 78.3 352 96C352 113.7 366.3 128 384 128L466.7 128L265.3 329.4C252.8 341.9 252.8 362.2 265.3 374.7C277.8 387.2 298.1 387.2 310.6 374.7L512 173.3L512 256C512 273.7 526.3 288 544 288C561.7 288 576 273.7 576 256L576 96C576 78.3 561.7 64 544 64L384 64zM144 160C99.8 160 64 195.8 64 240L64 496C64 540.2 99.8 576 144 576L400 576C444.2 576 480 540.2 480 496L480 416C480 398.3 465.7 384 448 384C430.3 384 416 398.3 416 416L416 496C416 504.8 408.8 512 400 512L144 512C135.2 512 128 504.8 128 496L128 240C128 231.2 135.2 224 144 224L224 224C241.7 224 256 209.7 256 192C256 174.3 241.7 160 224 160L144 160z"/>
+    </svg></div>
+  </div>
+</a>
+
+        <div class="Trennlinie"></div>
+      </section>
+
+</section>
+
+<footer class="footer">
+  <span>Rechtliches</span>
+  <span>Datenschutz</span>
+  <span>Impressum</span>
+  <span>Release Notes</span>
+</footer>
+
+  </body>
+</html>
