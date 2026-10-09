@@ -546,47 +546,44 @@ a {
   height: 500px;
 }
 
-/* style the slider */
-#sketch input[type="range"] {
-  /* position of the slider underneath the clusters */
-  position: absolute;
-  left: 155px;
-  top: 410px;
+/* style the AGEGROUP slider */
+#c_AgeGroup_FSME {
+  position: relative;
+}
 
-  /* size of the slider */
+/* position and style the slider */
+#c_AgeGroup_FSME input[type="range"] {
+  position: absolute;
+  left: 120px;
+  top: 405px;
   width: 290px;
   height: 5px;
+  margin: 0;
 
-  /* remove the browser's default slider styling */
   appearance: none;
   -webkit-appearance: none;
 
-  /* colour of the slider track */
   background: #dce5e9;
-
-  /* rounded slider track */
   border-radius: 5px;
-
-  /* remove the default outline */
   outline: none;
 }
 
 /* style the slider button */
-#sketch input[type="range"]::-webkit-slider-thumb {
-  /* remove the browser's default thumb */
+#c_AgeGroup_FSME input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   -webkit-appearance: none;
-
-  /* size of the round button */
   width: 18px;
   height: 18px;
-
-  /* button colour */
   background: #0a3c6e;
-
-  /* makes the button round */
   border-radius: 50%;
+  cursor: pointer;
+}
 
-  /* shows that the button can be moved */
+#c_AgeGroup_FSME input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #0a3c6e;
+  border: none;
+  border-radius: 50%;
   cursor: pointer;
 }

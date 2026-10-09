@@ -3,7 +3,7 @@ function Karte_FSME(p) {
   let mapData;
 
   // labels
-  let years = ["2020", "2021", "2022", "2023", "2024", "2025"];
+  let years = Array.from({ length: 13 }, (_, i) => String(2013 + i));
 
   let cantons = [
     "AG",
@@ -41,57 +41,49 @@ function Karte_FSME(p) {
   // color of the lines between cantons
   let cantonBorderCol = [80, 80, 80];
 
-  // highest incidence in our data - for an updating file i need to make this a calculation to adapt and find higest value later on
+  // highest incidence in the selected year
   // used as the maximum for the color scale
-  let maxIncidence = 12.61;
+  let maxIncidence = 0;
 
   // empty arrays for the values
   // each array contains the values for each year
-  let cases = [[], [], [], [], [], []];
-  let populations = [[], [], [], [], [], []];
-  let incidences = [[], [], [], [], [], []];
+  let cases = Array.from({ length: years.length }, () => []);
+  let populations = Array.from({ length: years.length }, () => []);
+  let incidences = Array.from({ length: years.length }, () => []);
 
   // current year -> year that is shown from the beginning
-  // 0 = 2020, 1 = 2021, etc.
-  let currentYear = 5;
+  // 0 = 2013, 1 = 2014, etc.
+  let currentYear = years.length - 1;
 
   // selected canton -> starts with no canton selected
   let selectedCanton = null;
 
   // async + await ersetzt die preload function
   p.setup = async function () {
-    let canvas = p.createCanvas(600, 1000);
+    let canvas = p.createCanvas(500, 1000);
 
-    data = await p.loadTable("assets/FSME_oblig/data.csv", ",", "header");
+    data = await d3.csv("assets/FSME_oblig/data.csv");
+
+    console.log(data);
 
     // load the geojson
     mapData = await p.loadJSON("assets/data_Karte/canton.geojson");
 
-    // number of rows in the csv
-    let rows = data.getRowCount();
-
     // loop through each row of the csv
-    for (let i = 0; i < rows; i++) {
-      let category = data.getString(i, 0); // col 0 : valueCategory
+    for (let row of data) {
+      // The CSV uses the columns value, pop, and incValue.
+      if (
+        row.valueCategory === "cases" &&
+        row.georegion_type === "canton" &&
+        row.temporal_type === "year"
+      ) {
+        let yearIndex = years.indexOf(row.temporal);
+        let canton = row.georegion;
 
-      // only use yearly case data
-      if (category === "cases" && data.getString(i, 2) === "year") {
-        let year = data.getString(i, 1); // col 1 : temporal
-        let canton = data.getString(i, 3); // col 3 : georegion
-        let cantonType = data.getString(i, 4); // col 4 : georegion type
-
-        let casesValue = data.getNum(i, 8); // col 8 : cases
-        let populationValue = data.getNum(i, 9); // col 9 : population
-        let incidenceValue = data.getNum(i, 10); // col 10 : incidence
-
-        // find the position of the year in our years array
-        let yearIndex = years.indexOf(year);
-
-        // save the values in the correct year and canton array
-        if (yearIndex !== -1 && cantonType === "canton") {
-          cases[yearIndex][canton] = casesValue;
-          populations[yearIndex][canton] = populationValue;
-          incidences[yearIndex][canton] = incidenceValue;
+        if (yearIndex !== -1 && cantons.includes(canton)) {
+          cases[yearIndex][canton] = toNumber(row.value);
+          populations[yearIndex][canton] = toNumber(row.pop);
+          incidences[yearIndex][canton] = toNumber(row.incValue);
         }
       }
     }
@@ -102,6 +94,11 @@ function Karte_FSME(p) {
 
   p.draw = function () {
     p.background(250);
+
+    //calculate the highest incidence for the selected year
+    // used as the maximum for the map colors and ranking bars
+    maxIncidence =
+      d3.max(cantons, (canton) => incidences[currentYear][canton] || 0) || 1;
 
     // main margin
     let margin = 35;
@@ -138,7 +135,7 @@ function Karte_FSME(p) {
       let coordinates = feature.geometry.coordinates;
 
       // get the incidence for the selected year
-      let incidenceValue = incidences[currentYear][canton];
+      let incidenceValue = incidences[currentYear][canton] || 0;
 
       // calculate color from incidence
       // 0 incidence = grey
@@ -248,9 +245,9 @@ function Karte_FSME(p) {
     }
 
     // get information for selected canton popup
-    let incidenceValue = incidences[currentYear][selectedCanton];
-    let cantonCases = cases[currentYear][selectedCanton];
-    let population = populations[currentYear][selectedCanton];
+    let incidenceValue = incidences[currentYear][selectedCanton] || 0;
+    let cantonCases = cases[currentYear][selectedCanton] || 0;
+    let population = populations[currentYear][selectedCanton] || 0;
 
     // popup position and size
     let margin = 35;
@@ -347,7 +344,7 @@ function Karte_FSME(p) {
 
     // create ranking from all cantons
     for (let canton of cantons) {
-      let incidenceValue = incidences[currentYear][canton];
+      let incidenceValue = incidences[currentYear][canton] || 0;
 
       ranking.push({
         canton: canton,
@@ -505,6 +502,11 @@ function Karte_FSME(p) {
     }
 
     return null;
+  }
+
+  function toNumber(value) {
+    let number = Number(value);
+    return Number.isFinite(number) ? number : 0;
   }
 
   function getCantonName(canton) {
