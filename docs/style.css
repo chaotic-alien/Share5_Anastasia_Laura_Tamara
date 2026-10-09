@@ -1,0 +1,589 @@
+:root {
+  --schriftfarbe-bag: #1c2938;
+  --schriftfarbe-bag-link: #dd202b;
+  --farbe-fsme: #b299ff;
+  --farbe-fsme-hell: #f0ebff;
+  --farbe-tularaemie: #fbbf24;
+  --farbe-tularaemie-hell: #fff7e6;
+  --farbe-borreliose: #ffc9cd;
+  --farbe-borreliose-hell: #fff4f5;
+}
+
+body {
+  font-family: noto-sans, sans-serif;
+  margin: 0rem;
+  padding: 0;
+  color: #1c2938;
+  background-color: #ffffff;
+  text-decoration: none;
+  line-height: 1.6;
+}
+.Hauptinhalt {
+  margin: 1rem;
+}
+
+.Titel {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--schriftfarbe-bag);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.Untertitel {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--schriftfarbe-bag);
+  margin-top: 1rem;
+  line-height: 1.2;
+}
+
+.Ueberschrift {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--schriftfarbe-bag);
+  margin-bottom: 0.5rem;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* --- TOP BAR (Dunkelblau) --- */
+.top-bar {
+  background-color: #2c4356; /* Schweizer Bund-Dunkelblau */
+  color: #ffffff;
+  padding: 10px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.top-bar-left,
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.top-bar-left:hover,
+.top-bar-right:hover {
+  opacity: 0.9;
+}
+
+.top-bar span {
+  margin-right: 8px;
+}
+
+.top-bar i {
+  font-size: 12px;
+}
+
+/* --- MAIN NAVIGATION BAR (Weiss) --- */
+.main-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.brand-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #2c4356;
+}
+
+.brand-container img {
+  height: 7vh;
+}
+
+/* Standard (Desktop): Mobile-Logo ausblenden */
+.logo-mobile {
+  display: none;
+}
+
+.logo-desktop {
+  display: block; /* oder inline-block */
+}
+
+/* Mobile Ansicht (unter 768px) */
+@media (max-width: 768px) {
+  .logo-desktop {
+    display: none; /* Desktop-Logo ausblenden */
+  }
+
+  .logo-mobile {
+    display: block; /* Mobile-Logo einblenden */
+  }
+}
+
+/* Trennlinie neben dem Wappen */
+.brand-divider {
+  width: 1px;
+  height: 40px;
+  background-color: #cccccc;
+  margin: 0 16px;
+}
+
+/* Textbereich (Titel & Untertitel) */
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #2c4356;
+}
+
+.brand-subtitle {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #2c4356;
+  margin-top: 2px;
+}
+
+/* Standard (Desktop): Kurzer Text ist versteckt */
+.short-text {
+  display: none;
+}
+
+/* Mobile Ansicht (z.B. Bildschirmbreite bis 768px) */
+@media (max-width: 768px) {
+  .full-text {
+    display: none; /* Langer Text wird ausgeblendet */
+  }
+
+  .short-text {
+    display: inline; /* Kurzer Text wird eingeblendet */
+  }
+}
+
+/* Hamburger Menü Icon */
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2c4356;
+  font-size: 24px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-button:hover {
+  opacity: 0.7;
+}
+
+/* Responsive Anpassung für kleinere Bildschirme */
+@media (max-width: 600px) {
+  .top-bar {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .main-bar {
+    padding: 12px;
+  }
+
+  .brand-title,
+  .brand-subtitle {
+    font-size: 13px;
+  }
+
+  .brand-divider {
+    margin: 0 10px;
+    height: 32px;
+  }
+
+  .navigation-top {
+    top: 100px;
+  }
+}
+
+.Buttons-Krankheiten {
+  display: flex;
+  flex-direction: column; /* Vertikale Ausrichtung (untereinander) */
+  gap: 0.5vh; /* Abstand zwischen den einzelnen Buttons */
+}
+
+/* Button: Ordnet die divs INNERHALB des Buttons NEBENEINANDER an */
+.ButtonsK {
+  display: flex; /* Nebeneinander für die Inhalte im Button */
+  flex-direction: row;
+  align-items: center; /* Vertikal zentrieren */
+  justify-content: space-between; /* Abstand zwischen den Elementen */
+
+  padding: 10px 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  border: 0.5px solid #858585;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: -4px 4px 10px 0 rgba(0, 0, 0, 0.05);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease; /* Sanfte Animation beim Hover */
+}
+
+.ButtonsK:hover {
+  background-color: #f0f0f0; /* Hellerer Hintergrund beim Hover */
+  box-shadow: -4px 4px 15px 0 rgba(0, 0, 0, 0.1); /* Leicht verstärkter Schatten beim Hover */
+}
+
+.Krankheit-FSME {
+  color: schriftfarbe-bag;
+  font-weight: bold;
+}
+
+.Bennenung-Trend-FSME {
+  color: var(--farbe-fsme);
+  font-weight: lighter;
+  font-size: 0.75rem;
+}
+
+.Trend-Icon-FSME {
+  color: var(--farbe-fsme-hell);
+  height: 5vh;
+  width: 5vh;
+}
+
+.Meldesystem-FSME {
+  color: var(--farbe-fsme);
+  font-weight: lighter;
+  font-size: 0.75rem;
+  background-color: var(--farbe-fsme-hell);
+  border-radius: 10px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Sanfte Animation beim Hover */
+}
+
+.Meldesystem-FSME:hover {
+  transform: scale(1.05); /* Vergrößert den Button leicht beim Hover */
+}
+
+.Krankheit-Tularaemie {
+  color: schriftfarbe-bag;
+  font-weight: bold;
+}
+
+.Bennenung-Trend-Tularaemie {
+  color: var(--farbe-tularaemie);
+  font-weight: lighter;
+  font-size: 0.75rem;
+}
+
+.Trend-Icon-Tularaemie {
+  color: var(--farbe-tularaemie-hell);
+  height: 5vh;
+  width: 5vh;
+}
+
+.Meldesystem-Tularaemie {
+  color: var(--farbe-tularaemie);
+  font-weight: lighter;
+  font-size: 0.75rem;
+  background-color: var(--farbe-tularaemie-hell);
+  border-radius: 10px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Sanfte Animation beim Hover */
+}
+
+.Meldesystem-Tularaemie:hover {
+  transform: scale(1.05); /* Vergrößert den Button leicht beim Hover */
+}
+
+.Krankheit-Borreliose {
+  color: schriftfarbe-bag;
+  font-weight: bold;
+}
+
+.Bennenung-Trend-Borreliose {
+  color: var(--farbe-borreliose);
+  font-weight: lighter;
+  font-size: 0.75rem;
+}
+
+.Trend-Icon-Borreliose {
+  color: var(--farbe-borreliose-hell);
+  height: 5vh;
+  width: 5vh;
+}
+
+.Meldesystem-Borreliose {
+  color: var(--farbe-borreliose);
+  font-weight: lighter;
+  font-size: 0.75rem;
+  background-color: var(--farbe-borreliose-hell);
+  border-radius: 10px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Sanfte Animation beim Hover */
+}
+
+.Meldesystem-Borreliose:hover {
+  transform: scale(1.05); /* Vergrößert den Button leicht beim Hover */
+}
+
+#content {
+  margin-top: 20px;
+  padding: 10px;
+  /*background-color: #ffffff;*/
+  /* border: 1px solid #ccc;*/
+  border-radius: 6px;
+}
+
+#contentInfos {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.KrankheitLink {
+  color: #1c2938;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.KrankheitLink:hover {
+  font-weight: bold;
+  transform: scale(1.01); /* Vergrößert den Link leicht beim Hover */
+}
+
+a {
+  text-decoration: none;
+  color: inherit; /* Erbt die Farbe des übergeordneten Elements */
+}
+
+.KrankheitLink svg {
+  width: 24px;
+  height: 24px;
+}
+.Trennlinie {
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+.TitelButton {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: aqua;
+}
+
+.footer {
+  background-color: #2b3a4a; /* Dunkelblau/Grau wie auf dem Bild */
+  color: #ffffff; /* Weiße Schrift */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Oder 'center' für mittige Ausrichtung */
+  gap: 32px; /* Abstand zwischen den Texten */
+  padding: 16px 32px; /* Innenabstand oben/unten und links/rechts */
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.navigation-top {
+  position: sticky;
+  top: 106px;
+  z-index: 10;
+  background-color: #ffffff;
+  color: var(--schriftfarbe-bag);
+  box-shadow: 0px 8px 10px -5px rgba(188, 185, 185, 0.3);
+  padding: 10px 24px;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.navigation-top svg {
+  width: 24px;
+  height: 24px;
+  rotate: -90deg; /* Dreht den Pfeil um 90 Grad */
+  color: var(--schriftfarbe-bag);
+}
+
+.FSME-active {
+  display: flex;
+  gap: 16px;
+  color: var(--farbe-fsme);
+  padding: 10px 20px;
+  border-bottom: 2px solid var(--farbe-fsme);
+}
+
+.Tularaemie-active {
+  display: flex;
+  gap: 16px;
+  color: var(--farbe-tularaemie);
+  padding: 10px 20px;
+  border-bottom: 2px solid var(--farbe-tularaemie);
+}
+
+.Borreliose-active {
+  display: flex;
+  gap: 16px;
+  color: var(--farbe-borreliose);
+  padding: 10px 20px;
+  border-bottom: 2px solid var(--farbe-borreliose);
+}
+
+.Linkkrankheit {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.Link {
+  color: var(--schriftfarbe-bag-link);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+/* Container-Kiste */
+.info-box {
+  display: flex; /* Bringt Bild und Text nebeneinander */
+  align-items: center; /* Zentriert Bild und Text vertikal */
+  gap: 20px; /* Abstand zwischen Bild und Text */
+  font-family: Arial, sans-serif;
+  max-width: 500px; /* Maximale Breite der Box */
+  padding: 20px;
+}
+
+/* Bild-Bereich links */
+.info-box-image img {
+  width: 60px; /* Anpassen nach Bedarf */
+  height: 60px;
+  align-self: flex-start; /* Bild oben ausrichten */
+  object-fit: cover;
+  border-radius: 4px; /* Leichte Abrundung der Ecken */
+  padding: 20px; /* Innenabstand für das Bild */
+
+  display: block;
+}
+
+.info-box-image.bg-color-fsme {
+  background-color: var(--farbe-fsme); /* Gelb */
+  border-radius: 4px;
+}
+
+.info-box-image.bg-color-tularaemie {
+  background-color: var(--farbe-tularaemie); /* Lila */
+  border-radius: 4px;
+}
+.info-box-image.bg-color-borreliose {
+  background-color: var(--farbe-borreliose); /* Rosa */
+  border-radius: 4px;
+}
+
+/* Text-Bereich rechts */
+.info-box-content {
+  display: flex;
+  flex-direction: column; /* Ordnet die 3 Textzeilen untereinander an */
+  gap: 4px; /* Abstand zwischen den Textzeilen */
+}
+
+/* Zeile 1: Kategoriestext (grau & klein) */
+.info-box-content .category {
+  font-size: 14px;
+  color: #999999;
+}
+
+/* Zeile 2: Titel (fett & dunkel) */
+.info-box-content .title {
+  margin: 0; /* Standart-Abstände des h3 entfernen */
+  font-size: 20px;
+  font-weight: bold;
+  color: #1a2b3c;
+}
+
+/* Zeile 3: Beschreibungstext */
+.info-box-content .description {
+  margin: 0; /* Standart-Abstände des p entfernen */
+  font-size: 14px;
+  color: #333333;
+}
+
+#c_Radial_FSME {
+  border: 1px solid magenta;
+  width: 500px;
+  height: 500px;
+}
+
+#c_Karte_FSME {
+  border: 1px solid magenta;
+  width: 500px;
+  height: 1000px;
+}
+
+#c_AgeGroup_FSME {
+  border: 1px solid magenta;
+  width: 500px;
+  height: 500px;
+}
+
+/* style the AGEGROUP slider */
+#c_AgeGroup_FSME {
+  position: relative;
+}
+
+/* position and style the slider */
+#c_AgeGroup_FSME input[type="range"] {
+  position: absolute;
+  left: 120px;
+  top: 405px;
+  width: 290px;
+  height: 5px;
+  margin: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background: #dce5e9;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* style the slider button */
+#c_AgeGroup_FSME input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #0a3c6e;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#c_AgeGroup_FSME input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #0a3c6e;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
