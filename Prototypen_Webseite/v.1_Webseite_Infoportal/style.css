@@ -631,3 +631,8 @@ a {
   border-radius: 50%;
   cursor: pointer;
 }
+
+/* hide the lil-gui panel, the year buttons in the chart are used instead */
+.lil-gui {
+  display: none;
+}

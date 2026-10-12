@@ -426,8 +426,7 @@ function Karte_FSME(p) {
       p.fill(25, 45, 60);
       p.textAlign(p.RIGHT);
 
-      p.text(rankingItem.incidence.toFixed(1) + " Cases", x + 300, barY + 8);
-
+      p.text(rankingItem.incidence.toFixed(1) + " Fälle", x + 300, barY + 8);
       p.textAlign(p.LEFT);
     }
   }
