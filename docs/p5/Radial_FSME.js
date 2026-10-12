@@ -112,6 +112,9 @@ function Radial_FSME(p) {
     p.noFill();
     p.ellipse(250, 250, 390);
 
+    //Beschriftung
+    labels(year);
+
     //Draw wird NICHT wiederholt
     p.noLoop();
   };
@@ -217,6 +220,17 @@ function Radial_FSME(p) {
     }
 
     p.pop();
+  }
+
+  function labels(year) {
+    
+    p.fill(0);
+    p.textSize(20);
+    p.text("FSME Fälle pro Monat in der Schweiz", 0, 20,);
+
+    p.textSize(15);
+    p.text("Year: " + (year +(2012))  , 0, 35);
+
   }
 
   //------- Klasse für Form --------
