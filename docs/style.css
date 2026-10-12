@@ -531,7 +531,7 @@ a {
 #c_Radial_FSME {
   border: 1px solid magenta;
   width: 500px;
-  height: 500px;
+  height: 600px;
 }
 
 #c_Karte_FSME {
@@ -586,4 +586,53 @@ a {
   border: none;
   border-radius: 50%;
   cursor: pointer;
+}
+
+/* style the KARTE slider */
+#c_Karte_FSME {
+  position: relative;
+  width: 500px;
+}
+
+/* position and style the slider */
+#c_Karte_FSME input[type="range"] {
+  position: absolute;
+  left: 35px;
+  top: 100px;
+  width: 430px;
+  height: 5px;
+  margin: 0;
+  z-index: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background: #dce5e9;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* style the slider button */
+#c_Karte_FSME input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #0a3c6e;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#c_Karte_FSME input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #0a3c6e;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* hide the lil-gui panel, the year buttons in the chart are used instead */
+.lil-gui {
+  display: none;
 }
