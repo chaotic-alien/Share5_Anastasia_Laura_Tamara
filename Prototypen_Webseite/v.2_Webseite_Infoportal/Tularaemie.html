@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BAG-Infoportal übertragbare Krankheiten</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="js/p5.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lil-gui@0.21.0/dist/lil-gui.umd.min.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <!-- Dunkelblaue obere Leiste -->
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <span>Alle Schweizer Bundesbehörden</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="top-bar-right">
+          <span>DE</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+
+      <!-- Weiße Haupt-Headerleiste -->
+      <div class="main-bar">
+        <a href="#" class="brand-container">
+          <img src="SVG/BundLogo.svg" alt="Bundeslogo" class="logo-desktop" />
+          <img
+            src="SVG/BundLogo-mobile.svg"
+            alt="Bundeslogo"
+            class="logo-mobile"
+          />
+
+          <div class="brand-divider"></div>
+
+          <div class="brand-text">
+            <span class="brand-title">
+              <span class="full-text">Bundesamt für Gesundheit BAG</span>
+              <span class="short-text">BAG</span>
+            </span>
+            <span class="brand-subtitle">
+              <span class="full-text">Infoportal übertragbare Krankheiten</span>
+              <span class="short-text">IDD</span>
+            </span>
+          </div>
+        </a>
+
+        <!-- Menü-Button (Burger-Icon) -->
+        <button class="menu-button" aria-label="Menü öffnen">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <section class="Hauptinhalt">
+      <div class="Titel">Zeckenübertragene Krankheiten</div>
+
+      <!--Navigation Top-->
+      <nav class="navigation-top">
+        <a href="index.html"
+          ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <!--!Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+            <path
+              d="M342.6 41.4C330.1 28.9 309.8 28.9 297.3 41.4L169.3 169.4C156.8 181.9 156.8 202.2 169.3 214.7C181.8 227.2 202.1 227.2 214.6 214.7L288 141.3L288 576C288 593.7 302.3 608 320 608C337.7 608 352 593.7 352 576L352 141.3L425.4 214.7C437.9 227.2 458.2 227.2 470.7 214.7C483.2 202.2 483.2 181.9 470.7 169.4L342.7 41.4z"
+            /></svg
+        ></a>
+        <a href="FSME.html">FSME</a>
+        <a href="Tularaemie.html" class="Tularaemie-active">Tularämie</a>
+        <a href="Borreliose.html">Borreliose</a>
+      </nav>
+    </section>
+  </body>
+</html>
