@@ -33,6 +33,7 @@ function Radial_FSME(p) {
     "Nov",
     "Dec",
   ];
+
   let year = 1; //max 13 für 2026 brauch ich noch lösung
 
   //wichtig für das Diagramm
@@ -48,8 +49,20 @@ function Radial_FSME(p) {
   let abstand;
   let radius;
 
-  //farbe im shape
-  let c = 255;
+  // .......... Visuelle Einstellungen ..........
+  //farbe im shape (rgb)
+  let r = 0;
+  let g = 200;
+  let b = 255;
+  //alpha (durchsichtigkeit)
+  let a = 255;
+
+  //Beschriftungsgrössen
+  labelMonth = 15;
+  labelScale = 12;
+  labelTitle = 20;
+  labelYear = 15;
+  //.............................................
 
   //------ Setup -------
   //async + await ersetzt die preload function
@@ -62,7 +75,7 @@ function Radial_FSME(p) {
 
     //nur die Daten pro Monat
     filteredData = data.filter(
-      (d) => d.valueCategory === "cases" && d.temporal_type === "month",
+      (d) => d.valueCategory === "cases" && d.temporal_type === "month"
     );
     console.log(filteredData);
 
@@ -79,7 +92,10 @@ function Radial_FSME(p) {
       maxValue,
       p,
       year,
-      c,
+      r,
+      g,
+      b,
+      a
     );
 
     // gui einbauen
@@ -99,6 +115,9 @@ function Radial_FSME(p) {
   p.draw = function () {
     p.background(255);
 
+    //irgendwo überschreibt es die textSize, deshalb hier nochmal setzen
+    //p.textSize(12);
+
     //Shape zeichnen
     p.push();
     p.translate(p.height / 2, p.width / 2);
@@ -108,12 +127,8 @@ function Radial_FSME(p) {
     //Zeichnet die Basis des Diagramms (Kreise und Striche)
     drawBase();
 
-    //äusserster Kreis
-    p.noFill();
-    p.ellipse(250, 250, 390);
-
     //Beschriftung
-    labels(year);
+    title(year);
 
     //Draw wird NICHT wiederholt
     p.noLoop();
@@ -122,7 +137,10 @@ function Radial_FSME(p) {
   // ----- Gui update on Change ----
   function updateYear(t) {
     year = t;
-    c = 255;
+    r = 0;
+    g = 200;
+    b = 255;
+    a = 255;
 
     shape = new Shape(
       x,
@@ -133,7 +151,10 @@ function Radial_FSME(p) {
       maxValue,
       p,
       year,
-      c,
+      r,
+      g,
+      b,
+      a
     );
 
     p.redraw();
@@ -141,9 +162,21 @@ function Radial_FSME(p) {
 
   //----- alle Jahre anzeigen (Gui Button) -------
   function allYears() {
+    p.background(255);
+
     for (let i = 13; i >= 1; i--) {
       //Farbe mappen nach Jahr
-      c = p.map(i, 13, 1, 0, 255);
+      //--- mappen
+      r = p.map(i, 1, 13, 20, 200);
+      g = p.map(i, 1, 13, 50, 200);
+      b = p.map(i, 1, 13, 255, 255);
+
+      //--- random
+      // r = p.random(0,255);
+      //  g = p.random(100,255);
+      //  b = p.random(100,255);
+      
+      a = 120;
 
       //für jedes Jahr neuen Shape zeichnen (13 Shapes)
       shape = new Shape(
@@ -155,7 +188,10 @@ function Radial_FSME(p) {
         maxValue,
         p,
         i,
-        c,
+        r,
+        g,
+        b,
+        a
       );
 
       // Shapes zeichnen
@@ -194,6 +230,7 @@ function Radial_FSME(p) {
       p.noStroke();
       p.fill(100, 100, 100, 80);
       p.textAlign(p.CENTER, p.CENTER);
+      p.textSize(labelScale);
       p.text(abstand, 0, -radius);
 
       p.noStroke();
@@ -207,11 +244,13 @@ function Radial_FSME(p) {
     p.rotate(step / 2);
 
     //Striche & Monat Beschriftung
-    p.fill(0);
 
     for (let i = 0; i < numLines; i++) {
+      p.fill(0);
       p.noStroke();
-      p.text(month[i], -10, -210);
+
+      p.textSize(labelMonth);
+      p.text(month[i], 0, -210);
 
       p.stroke(0);
       p.line(0, -lineLength, 0, 0); // Draw line from the center outward
@@ -220,17 +259,19 @@ function Radial_FSME(p) {
     }
 
     p.pop();
+
+    p.noFill();
+    p.ellipse(250, 250, 390);
   }
 
-  function labels(year) {
-    
+  function title(year) {
     p.fill(0);
-    p.textSize(20);
-    p.text("FSME Fälle pro Monat in der Schweiz", 0, 20,);
+    p.textSize(labelTitle);
+    p.text("FSME Fälle pro Monat und Jahr in der Schweiz", 50, 20);
 
-    p.textSize(15);
-    p.text("Year: " + (year +(2012))  , 0, 35);
-
+    p.textSize(labelYear);
+    p.fill(100);
+    p.text("Jahr: " + (year + 2012), 48, 40);
   }
 
   //------- Klasse für Form --------
@@ -244,7 +285,10 @@ function Radial_FSME(p) {
       maxValue,
       p,
       year,
-      c,
+      r,
+      g,
+      b,
+      a
     ) {
       this.p = p;
       this.pos = p.createVector(x, y);
@@ -252,7 +296,10 @@ function Radial_FSME(p) {
       this.data = filteredData;
       this.points = [];
       this.values = [];
-      this.c = c;
+      this.r = r;
+      this.g = g;
+      this.b = b;
+      this.a = a;
 
       let angle = 360 / numLines;
 
@@ -279,9 +326,9 @@ function Radial_FSME(p) {
       const p = this.p;
 
       // Punkte verbinden
-      p.fill(this.c, 0, 255);
-      //p.noStroke();
-      p.stroke(0);
+      p.fill(this.r, this.g, this.b, this.a);
+      p.noStroke();
+      //p.stroke(0);
       //p.strokeWeight(0.5);
 
       p.beginShape();
