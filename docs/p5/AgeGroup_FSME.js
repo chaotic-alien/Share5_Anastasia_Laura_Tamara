@@ -3,8 +3,8 @@
 
 function AgeGroup_FSME(p) {
 
-  let data;
 
+  let data;
   // labels
   let ages = ["0 - 16", "17 - 44", "45 - 64", "65 - 84", "85+"];
 
@@ -29,16 +29,17 @@ function AgeGroup_FSME(p) {
   // async + await ersetzt die preload function
   p.setup = async function () {
 
+    
+
     // wait until csv completely loaded
     data = await d3.csv("assets/FSME_oblig/data.csv");
 
+
     let canvas = p.createCanvas(350, 420);
-
     canvas.parent("c_AgeGroup_FSME");
-
     p.noLoop();
-
     p.angleMode(p.DEGREES);
+   
 
     // create year slider – Asked Co-Pilot to create it
     yearSlider = p.createSlider(0, 3, currentYear, 1);
@@ -109,10 +110,10 @@ function AgeGroup_FSME(p) {
 
     }
 
+
     p.redraw();
 
   };
-
 
 
 
@@ -240,16 +241,15 @@ function AgeGroup_FSME(p) {
   }
 
   function drawAgeGroupLabel(a, centerX, centerY) {
-
     p.fill(35, 50, 60);
     p.textAlign(p.CENTER, p.CENTER);
     p.textStyle(p.BOLD);
     p.textSize(10);
     p.text(ages[a].replace(" - ", " – ") + " J.", centerX, centerY + 55);
-
   }
 
+  // Close the AgeGroup_FSME function here
 }
 
-// start the p5 sketch inside the website element
+// Start the sketch outside the function
 new p5(AgeGroup_FSME, "c_AgeGroup_FSME");

@@ -1,3 +1,6 @@
+
+
+
 :root {
   --schriftfarbe-bag: #1c2938;
   --schriftfarbe-bag-link: #4c1d95;
@@ -554,7 +557,7 @@ a {
 #c_Radial_FSME {
   border: 1px solid magenta;
   width: 350px;
-  height: 600px;
+  height: 400px;
 }
 
 #c_Karte_FSME {
