@@ -10,9 +10,10 @@ function AgeGroup_FSME(p) {
 
   let years = ["2022", "2023", "2024", "2025"];
 
-  // colors
-  let brightestBlue = [150, 210, 235];
-  let darkestBlue = [10, 60, 110];
+
+  //Pink Now 
+  let brightestBlue = [249, 168, 212];
+  let darkestBlue = [131, 24, 67];
 
   // values
   let vals = [[], [], [], []];
@@ -188,8 +189,8 @@ function AgeGroup_FSME(p) {
       p.fill(150, 160, 165);
       p.textAlign(p.CENTER, p.CENTER);
       p.textStyle(p.BOLD);
-      p.textSize(11);
-    p.text("k.A.", centerX, centerY + 55);
+      p.textSize(10);
+      p.text("k.A.", centerX, centerY + 72);
 
       drawAgeGroupLabel(a, centerX, centerY);
 
@@ -221,9 +222,9 @@ function AgeGroup_FSME(p) {
     // value
     p.fill(35, 50, 60);
     p.textAlign(p.CENTER, p.CENTER);
-    p.textStyle(p.BOLD);
+    p.textStyle(p.NORMAL);
     p.textSize(10);
-    p.text("≈ " + dotAmount + " Fälle", centerX, centerY + 55);
+    p.text("≈ " + dotAmount + " Fälle", centerX, centerY + 72);
 
     // age group label
     drawAgeGroupLabel(a, centerX, centerY);
@@ -234,8 +235,8 @@ function AgeGroup_FSME(p) {
     p.fill(35, 50, 60);
     p.textAlign(p.CENTER, p.CENTER);
     p.textStyle(p.BOLD);
-    p.textSize(11);
-    p.text(ages[a].replace(" - ", " – ") + " J.", centerX, centerY + 72);
+    p.textSize(10);
+    p.text(ages[a].replace(" - ", " – ") + " J.", centerX, centerY + 55);
 
   }
 
