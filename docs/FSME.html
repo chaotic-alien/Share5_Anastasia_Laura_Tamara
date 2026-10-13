@@ -98,23 +98,13 @@
           <div class="Untertitel">Zeitliche Entwicklung</div>
           <div class="Ueberschrift-dünn">Gemeldete Fälle pro Monat</div>
         </div>
-        <button id="audioButton" class="Zeckenbutton" type="button">
+        <button id="audioButtonZeitlicheEntwicklung" class="Zeckenbutton" type="button" data-audio-target="audioZeitlicheEntwicklung">
 <img src="zecke.svg" alt="Zecken Icon" width="50" height="50">
 </button>
-<audio id="zeckenAudio" src="Audio/FSME-Zeitliche_Entwicklung.mp3" preload="auto"></audio>
+<audio id="audioZeitlicheEntwicklung" src="Audio/FSME-Zeitliche_Entwicklung.mp3" preload="auto"></audio>
 
-<script>
-  const button = document.getElementById('audioButton');
-  const audio = document.getElementById('zeckenAudio');
 
-  button.addEventListener('click', () => {
-    // Setzt das Audio bei jedem Klick an den Anfang zurück (optional)
-    audio.currentTime = 0;
-    audio.play().catch(error => {
-      console.log("Autoplay oder Wiedergabe verhindert:", error);
-    });
-  });
-</script>
+
       </div>
 
       <div id="c_Radial_FSME"> </div>
@@ -125,23 +115,10 @@
           <div class="Untertitel">Verteilung nach Kantone</div>
           <div class="Ueberschrift-dünn">Fälle pro 100'000 Einwohner</div>
         </div>
-        <button id="audioButton" class="Zeckenbutton" type="button">
+        <button id="audioButtonKantone" class="Zeckenbutton" type="button" data-audio-target="audioKantone">
 <img src="zecke.svg" alt="Zecken Icon" width="50" height="50">
 </button>
-<audio id="zeckenAudio" src="Audio/FSME-Verteilung_nach_Kantone.mp3" preload="auto"></audio>
-
-<script>
-  const button = document.getElementById('audioButton');
-  const audio = document.getElementById('zeckenAudio');
-
-  button.addEventListener('click', () => {
-    // Setzt das Audio bei jedem Klick an den Anfang zurück (optional)
-    audio.currentTime = 0;
-    audio.play().catch(error => {
-      console.log("Autoplay oder Wiedergabe verhindert:", error);
-    });
-  });
-</script>
+<audio id="audioKantone" src="Audio/FSME-Verteilung_nach_Kantone.mp3" preload="auto"></audio>
       </div>
 
       <div id="c_Karte_FSME"> </div>
@@ -152,20 +129,19 @@
           <div class="Untertitel">Verteilung nach Altersklassen</div>
           <div class="Ueberschrift-dünn">Durchschnittliche Fälle pro 1 Millionen Einwohner:innen der letzten 10 Jahre</div>
         </div>
-        <button id="audioButton" class="Zeckenbutton" type="button">
+        <button id="audioButtonAltersklassen" class="Zeckenbutton" type="button" data-audio-target="audioAltersklassen">
 <img src="zecke.svg" alt="Zecken Icon" width="50" height="50">
 </button>
-<audio id="zeckenAudio" src="Audio/FSME-Verteilung_nach_Alter.mp3" preload="auto"></audio>
+<audio id="audioAltersklassen" src="Audio/FSME-Verteilung_nach_Alter.mp3" preload="auto"></audio>
 
 <script>
-  const button = document.getElementById('audioButton');
-  const audio = document.getElementById('zeckenAudio');
-
-  button.addEventListener('click', () => {
-    // Setzt das Audio bei jedem Klick an den Anfang zurück (optional)
-    audio.currentTime = 0;
-    audio.play().catch(error => {
-      console.log("Autoplay oder Wiedergabe verhindert:", error);
+  document.querySelectorAll('.Zeckenbutton').forEach(button => {
+    button.addEventListener('click', () => {
+      const audio = document.getElementById(button.dataset.audioTarget);
+      audio.currentTime = 0;
+      audio.play().catch(error => {
+        console.error('Audio konnte nicht abgespielt werden:', error);
+      });
     });
   });
 </script>
