@@ -10,9 +10,10 @@ function AgeGroup_FSME(p) {
 
   let years = ["2022", "2023", "2024", "2025"];
 
-  // colors
-  let brightestBlue = [150, 210, 235];
-  let darkestBlue = [10, 60, 110];
+
+  //Pink Now 
+  let brightestBlue = [249, 168, 212];
+  let darkestBlue = [131, 24, 67];
 
   // values
   let vals = [[], [], [], []];
@@ -31,7 +32,7 @@ function AgeGroup_FSME(p) {
     // wait until csv completely loaded
     data = await d3.csv("assets/FSME_oblig/data.csv");
 
-    let canvas = p.createCanvas(500, 500);
+    let canvas = p.createCanvas(350, 420);
 
     canvas.parent("c_AgeGroup_FSME");
 
@@ -112,34 +113,23 @@ function AgeGroup_FSME(p) {
 
   };
 
+
+
+
+
   p.draw = function () {
 
     p.background(250);
 
-    // title
-    p.noStroke();
-    p.fill(25, 45, 60);
-    p.textAlign(p.LEFT, p.CENTER);
-    p.textSize(19);
-    p.textStyle(p.BOLD);
-    p.text("Verteilung nach Altersklassen", 35, 35);
-
-    // explanation under the title
-    p.textStyle(p.NORMAL);
-    p.textSize(11);
-    p.fill(100, 110, 118);
-    p.text("Durchschnittliche Fälle pro 1 Million Einwohner:innen der letzten 10 Jahre",35,59 );
-   
     // current period
+    p.noStroke();
+    p.textAlign(p.LEFT, p.CENTER);
     p.textStyle(p.BOLD);
     p.textSize(13);
     p.fill(25, 45, 60);
     p.text((2012 + currentYear) + " – " + (2022 + currentYear),35, 105);
 
-    // small divider title vs graph 
-    p.stroke(220, 225, 228);
-    p.strokeWeight(1);
-    p.line(35, 125, p.width - 35, 125);
+    p.line(35, 38, p.width - 35, 38);
 
     // draw all age groups horizontally
     for (let a = 0; a < ages.length; a++) {
@@ -154,11 +144,11 @@ function AgeGroup_FSME(p) {
     p.textAlign(p.CENTER, p.CENTER);
 
     for (let i = 0; i < years.length; i++) {
-      let x = 120 + i * (290 / 3);
+      let x = 44 + i * (262 / 3);
 
         p.fill(100, 110, 118);
         p.textStyle(p.NORMAL);
-        p.text(years[i], x, 438);
+        p.text((2012 + i) + " – " + (2022 + i), x, 398);
 
     }
 
@@ -168,7 +158,7 @@ function AgeGroup_FSME(p) {
     p.text(
       "1 Punkt ≈ 1 Fall pro 1 Million Einwohner:innen",
       p.width / 2,
-      480
+      20
     );
 
   };
@@ -179,13 +169,12 @@ function AgeGroup_FSME(p) {
     // value for this age group
     let val = vals[currentYear][a];
 
-    // position
-    let leftMargin = 75;
-    let rightMargin = 75;
-    let usableWidth = p.width - leftMargin - rightMargin;
-    let spacing = usableWidth / (ages.length - 1);
-    let centerX = leftMargin + a * spacing;
-    let centerY = 220;
+    // position: 3 circles in the first row, 2 in the second row
+    let row = a < 3 ? 0 : 1;
+    let col = a < 3 ? a : a - 3;
+    let circlesInRow = row === 0 ? 3 : 2;
+    let centerX = p.width / 2 + (col - (circlesInRow - 1) / 2) * 99;
+    let centerY = 95 + row * 140;
 
     // draw background circle
     p.fill(250);
@@ -200,10 +189,10 @@ function AgeGroup_FSME(p) {
       p.fill(150, 160, 165);
       p.textAlign(p.CENTER, p.CENTER);
       p.textStyle(p.BOLD);
-      p.textSize(11);
-      p.text("k.A.", centerX, 330);
+      p.textSize(10);
+      p.text("k.A.", centerX, centerY + 72);
 
-      drawAgeGroupLabel(a, centerX);
+      drawAgeGroupLabel(a, centerX, centerY);
 
       return;
     }
@@ -233,21 +222,21 @@ function AgeGroup_FSME(p) {
     // value
     p.fill(35, 50, 60);
     p.textAlign(p.CENTER, p.CENTER);
-    p.textStyle(p.BOLD);
+    p.textStyle(p.NORMAL);
     p.textSize(10);
-    p.text("≈ " + dotAmount + " Fälle", centerX, 330);
+    p.text("≈ " + dotAmount + " Fälle", centerX, centerY + 72);
 
     // age group label
-    drawAgeGroupLabel(a, centerX);
+    drawAgeGroupLabel(a, centerX, centerY);
   }
 
-  function drawAgeGroupLabel(a, centerX) {
+  function drawAgeGroupLabel(a, centerX, centerY) {
 
     p.fill(35, 50, 60);
     p.textAlign(p.CENTER, p.CENTER);
     p.textStyle(p.BOLD);
-    p.textSize(11);
-    p.text(ages[a], centerX, 352);
+    p.textSize(10);
+    p.text(ages[a].replace(" - ", " – ") + " J.", centerX, centerY + 55);
 
   }
 
