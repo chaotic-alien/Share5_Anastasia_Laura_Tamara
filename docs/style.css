@@ -41,7 +41,7 @@ body {
 .Untertitel-row {
   display: flex;
   align-items: center;
-  gap: 1px;
+  gap: 10px;
   margin-top: 1rem;
 }
 
@@ -51,6 +51,7 @@ body {
 
 .Untertitel-text .Ueberschrift-dünn {
   margin-bottom: 0;
+  line-height: 1.2;
 }
 
 .Ueberschrift {
