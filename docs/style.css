@@ -1,12 +1,12 @@
 :root {
   --schriftfarbe-bag: #1c2938;
-  --schriftfarbe-bag-link: #dd202b;
-  --farbe-fsme: #b299ff;
-  --farbe-fsme-hell: #f0ebff;
-  --farbe-tularaemie: #fbbf24;
-  --farbe-tularaemie-hell: #fff7e6;
-  --farbe-borreliose: #ffc9cd;
-  --farbe-borreliose-hell: #fff4f5;
+  --schriftfarbe-bag-link: #4c1d95;
+  --farbe-fsme: #db2777;
+  --farbe-fsme-hell: #f9a8d4;
+  --farbe-tularaemie: #059669;
+  --farbe-tularaemie-hell: #6ee7b7;
+  --farbe-borreliose: #d97706;
+  --farbe-borreliose-hell: #fcd34d;
 }
 
 body {
@@ -41,6 +41,13 @@ body {
 .Ueberschrift {
   font-size: 1rem;
   font-weight: bold;
+  color: var(--schriftfarbe-bag);
+  margin-bottom: 0.5rem;
+}
+
+.Ueberschrift-dünn {
+  font-size: 1rem;
+  font-weight: lighter;
   color: var(--schriftfarbe-bag);
   margin-bottom: 0.5rem;
 }
