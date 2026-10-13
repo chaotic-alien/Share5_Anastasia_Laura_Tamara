@@ -560,7 +560,7 @@ a {
 #c_Karte_FSME {
   border: 1px solid magenta;
   width: 350px;
-  height: 1000px;
+  height: 680px;
 }
 
 #c_AgeGroup_FSME {
@@ -605,7 +605,7 @@ a {
 #c_AgeGroup_FSME input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
-  background: #0a3c6e;
+  background: #be185d;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -614,15 +614,15 @@ a {
 /* style the KARTE slider */
 #c_Karte_FSME {
   position: relative;
-  width: 500px;
+  width: 350px;
 }
 
 /* position and style the slider */
 #c_Karte_FSME input[type="range"] {
   position: absolute;
   left: 35px;
-  top: 100px;
-  width: 430px;
+  top: 395px;
+  width: 280px;
   height: 5px;
   margin: 0;
   z-index: 0;

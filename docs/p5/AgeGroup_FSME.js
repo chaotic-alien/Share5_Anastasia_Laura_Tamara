@@ -127,7 +127,7 @@ function AgeGroup_FSME(p) {
     p.textStyle(p.BOLD);
     p.textSize(13);
     p.fill(25, 45, 60);
-    p.text((2012 + currentYear) + " – " + (2022 + currentYear),35, 105);
+    p.text((2012 + currentYear) + " – " + (2022 + currentYear), 35, 105);
 
     p.line(35, 38, p.width - 35, 38);
 
@@ -136,7 +136,16 @@ function AgeGroup_FSME(p) {
       drawCircle(a);
     }
 
- 
+
+    // small markers under the slider, one for every year
+    p.stroke(170, 178, 185);
+    p.strokeWeight(1);
+
+    for (let i = 0; i < years.length; i++) {
+      let x = 44 + i * (262 / 3);
+      p.line(x, 380, x, 386);
+    }
+
     // slider years labels 
     p.noStroke();
     p.textStyle(p.NORMAL);
@@ -146,9 +155,9 @@ function AgeGroup_FSME(p) {
     for (let i = 0; i < years.length; i++) {
       let x = 44 + i * (262 / 3);
 
-        p.fill(100, 110, 118);
-        p.textStyle(p.NORMAL);
-        p.text((2012 + i) + " – " + (2022 + i), x, 398);
+      p.fill(100, 110, 118);
+      p.textStyle(p.NORMAL);
+      p.text((2012 + i) + " – " + (2022 + i), x, 398);
 
     }
 
@@ -163,7 +172,7 @@ function AgeGroup_FSME(p) {
 
   };
 
-  
+
   function drawCircle(a) {
 
     // value for this age group
@@ -204,7 +213,7 @@ function AgeGroup_FSME(p) {
     let yearValues = vals[currentYear].filter(val => Number.isFinite(val));
     let rankedValues = [...new Set(yearValues)].sort((a, b) => a - b);
 
-    let colorAmount = rankedValues.length > 1? rankedValues.indexOf(val) / (rankedValues.length - 1) : 0;
+    let colorAmount = rankedValues.length > 1 ? rankedValues.indexOf(val) / (rankedValues.length - 1) : 0;
 
     let r = p.lerp(brightestBlue[0], darkestBlue[0], colorAmount);
     let g = p.lerp(brightestBlue[1], darkestBlue[1], colorAmount);
