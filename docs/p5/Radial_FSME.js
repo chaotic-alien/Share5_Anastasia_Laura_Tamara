@@ -1,24 +1,17 @@
 function Radial_FSME(p) {
   // ----- ab hier P5 -------
 
-  //gui
-  let gui;
-  let settings = {
-    year: 1,
-    allYears: function () {
-      allYears();
-    },
-  };
+  //... Canvas anpassung ...
+  //hier alle grössenänderungen machen! -> alles hängt mit diesen grössen zusammen :)
+  let cWidth = 350;
+  let cHeigth = 400;
 
-  //slider
-  let slider;
-
-  //daten
+  //... daten ...
   let data;
   let filteredData = [];
   let maxValue;
 
-  //monate & jahre
+  //... monate & jahre ...
   let month = [
     "Jan",
     "Feb",
@@ -35,10 +28,10 @@ function Radial_FSME(p) {
   ];
   let year = 1; //max 13 für 2026 brauch ich noch lösung
 
-  //wichtig für das Diagramm
+  //... Diagramm variablen ...
   let numLines = 12; // Total number of lines
   let step = 360 / numLines; // Angle between each line
-  let lineLength = 200;
+  let lineLength = cWidth / 2 - 25;
 
   let x = p.width / 2;
   let y = p.height / 2;
@@ -48,34 +41,25 @@ function Radial_FSME(p) {
   let abstand;
   let radius;
 
-  //farbe im shape
-  let c = 255;
+  let colorValue;
 
-  //filter: ausgewählte Jahre (leer = alle Jahre)
+  // ... filter: ausgewählte Jahre (leer = alle Jahre) ...
   let selectedYears = [];
   let chipWidth = 30;
   let chipGap = (430 - 13 * 30) / 12;
 
-  //dropdown: Position und Zustand
+  //... dropdown: Position und Zustand ...
   let dropdownOpen = false;
-  let dropdownX = 35;
-  let dropdownY = 80;
+  let dropdownX = 20;
+  let dropdownY = 20;
   let dropdownW = 170;
   let dropdownH = 24;
   let rowH = 20;
 
-
-
-
-
-
-
-
-
   //------ Setup -------
   //async + await ersetzt die preload function
   p.setup = async function () {
-    p.createCanvas(500, 600);
+    p.createCanvas(cWidth, cHeigth);
     p.angleMode(p.DEGREES);
 
     data = await d3.csv("assets/FSME_oblig/data.csv");
@@ -83,7 +67,7 @@ function Radial_FSME(p) {
 
     //nur die Daten pro Monat
     filteredData = data.filter(
-      (d) => d.valueCategory === "cases" && d.temporal_type === "month",
+      (d) => d.valueCategory === "cases" && d.temporal_type === "month"
     );
     console.log(filteredData);
 
@@ -100,23 +84,8 @@ function Radial_FSME(p) {
       maxValue,
       p,
       year,
-      c,
     );
-
-    // gui einbauen
-    gui = new lil.GUI();
-
-    //gui anzeigen
-    gui.add(settings, "year", 1, 13, 1).onChange(updateYear);
-    gui.add(settings, "allYears");
   };
-
-
-
-
-
-
-
 
 
 
@@ -125,27 +94,14 @@ function Radial_FSME(p) {
   p.draw = function () {
     p.background(250);
 
-    // title
-    p.noStroke();
-    p.fill(25, 45, 60);
-    p.textAlign(p.LEFT, p.CENTER);
-    p.textSize(19);
-    p.textStyle(p.BOLD);
-    p.text("Zeitliche Entwicklung", 35, 35);
-
-    p.textStyle(p.NORMAL);
-    p.textSize(11);
-    p.fill(100, 110, 118);
-    p.text("Gemeldete Fälle pro Monat", 35, 59);
-
-
+    //... Diagramm ...
     // diagram moves down to make room for the header
     p.push();
-    p.translate(0, 100);
+    p.translate(0, 20);
 
     //Shape zeichnen
     p.push();
-    p.translate(250, 250);
+    p.translate(cWidth/2, cHeigth/2);
     //shape.display(this);
     drawSelectedYears();
     p.pop();
@@ -153,14 +109,9 @@ function Radial_FSME(p) {
     //Zeichnet die Basis des Diagramms (Kreise und Striche)
     drawBase();
 
-    //äusserster Kreis
-    p.noFill();
-    p.stroke(220, 225, 228);
-    p.strokeWeight(1);
-    p.ellipse(250, 250, 400);
-
     p.pop();
 
+    // ... Filter ...
     // filter is drawn last so the open list sits on top of the diagram
     drawYearFilter();
 
@@ -172,84 +123,10 @@ function Radial_FSME(p) {
 
 
 
-
-
-
-
-  // ----- Gui update on Change ----
-  function updateYear(t) {
-    year = t;
-    c = 255;
-
-    shape = new Shape(
-      x,
-      y,
-      filteredData,
-      numLines,
-      lineLength,
-      maxValue,
-      p,
-      year,
-      c,
-    );
-
-    p.redraw();
-  }
-
-
-
-
-
-
-
-
-
-  //----- alle Jahre anzeigen (Gui Button) -------
-  function allYears() {
-
-    // same offset as draw so shapes land on base
-    p.push();
-    p.translate(0, 100);
-    for (let i = 13; i >= 1; i--) {
-      //Farbe mappen nach Jahr
-      c = p.map(i, 13, 1, 0, 255);
-
-      //für jedes Jahr neuen Shape zeichnen (13 Shapes)
-      shape = new Shape(
-        x,
-        y,
-        filteredData,
-        numLines,
-        lineLength,
-        maxValue,
-        p,
-        i,
-        c,
-      );
-
-      // Shapes zeichnen
-      p.push();
-      p.translate(250, 250);
-      shape.display(this);
-      p.pop();
-    }
-
-    //Basis nochmal drüber legen
-    drawBase();
-    p.pop();
-  }
-
-
-
-
-
-
-
-
   // ------ Basis des Diagramms (Kreise und Striche) -------
   function drawBase() {
     p.push();
-    p.translate(250, 250);
+    p.translate(cWidth/2, cHeigth/2);
 
     // Kreise attribute
     p.noFill();
@@ -261,7 +138,7 @@ function Radial_FSME(p) {
     // rotate damit text nicht auf dem Strich liegt
     p.rotate(-step / 2);
 
-    // Kreise für alle 50 Fälle
+    // ... Kreise für alle 50 Fälle ...
     for (abstand = 20; abstand <= maxValue; abstand += 20) {
       // Fälle auf Radius mappen
       radius = p.map(abstand, 0, maxValue, 0, lineLength);
@@ -273,11 +150,13 @@ function Radial_FSME(p) {
       p.noStroke();
       p.fill(100, 100, 118, 90);
       p.textAlign(p.CENTER, p.CENTER);
-      p.text(abstand, 0, -radius );
+      p.text(abstand, 0, -radius);
+      
 
+      //Beschriftung des maximalen Wertes
       p.noStroke();
       p.fill(100, 110, 118, 90);
-      p.text(maxValue, 0, -lineLength);
+      p.text(maxValue, 0, -lineLength-5);
 
       p.noFill();
       p.stroke(220, 225, 228, 90);
@@ -285,13 +164,13 @@ function Radial_FSME(p) {
 
     p.rotate(step / 2);
 
-    //Striche & Monat Beschriftung
+    //Striche & Monate Beschriftung
     p.fill(25, 45, 60);
     p.textSize(11);
 
     for (let i = 0; i < numLines; i++) {
       p.noStroke();
-      p.text(month[i], -10, -210);
+      p.text(month[i], 0, -lineLength - 10); // Draw month label above the line
 
       p.stroke(220, 225, 228, 90);
       p.line(0, -lineLength, 0, 0); // Draw line from the center outward
@@ -299,19 +178,14 @@ function Radial_FSME(p) {
       p.rotate(step); // Rotate to next line
     }
 
+    //äusserster Kreis
+    p.noFill();
+    p.stroke(220, 225, 228);
+    p.strokeWeight(1);
+    p.ellipse(0, 0, lineLength * 2);
+
     p.pop();
   }
-
-
-
-
-
-
-
-
-
-
-
 
   // Jahr-Filter ->Shapes der ausgewählten Jahre zeichnen
   function drawSelectedYears() {
@@ -328,7 +202,7 @@ function Radial_FSME(p) {
     list.sort((a, b) => b - a);
 
     for (let i = 0; i < list.length; i++) {
-      let colorValue =
+      colorValue =
         list.length === 1 ? 255 : p.map(i, 0, list.length - 1, 0, 255);
 
       let yearShape = new Shape(
@@ -340,17 +214,12 @@ function Radial_FSME(p) {
         maxValue,
         p,
         list[i],
-        colorValue,
+        colorValue
       );
 
       yearShape.display();
     }
   }
-
-
-
-
-
 
   //Draw Filter (dropdown)
   function drawYearFilter() {
@@ -381,9 +250,23 @@ function Radial_FSME(p) {
     let arrowX = dropdownX + dropdownW - 16;
     let arrowY = dropdownY + dropdownH / 2;
     if (dropdownOpen) {
-      p.triangle(arrowX, arrowY + 2, arrowX + 8, arrowY + 2, arrowX + 4, arrowY - 3);
+      p.triangle(
+        arrowX,
+        arrowY + 2,
+        arrowX + 8,
+        arrowY + 2,
+        arrowX + 4,
+        arrowY - 3
+      );
     } else {
-      p.triangle(arrowX, arrowY - 2, arrowX + 8, arrowY - 2, arrowX + 4, arrowY + 3);
+      p.triangle(
+        arrowX,
+        arrowY - 2,
+        arrowX + 8,
+        arrowY - 2,
+        arrowX + 4,
+        arrowY + 3
+      );
     }
 
     // list of years, only when open
@@ -417,11 +300,13 @@ function Radial_FSME(p) {
     }
 
     // Clear all Button
-    p.textAlign(p.CENTER, p.CENTER);
+    p.rectMode(p.RADIUS);
     p.fill(250);
     p.stroke(220, 225, 228);
     p.strokeWeight(1);
-    p.rect(355, 48, 110, 22, 3);
+    p.rect(cWidth -70, 32, 50, 13, 3);
+    
+  
 
     p.noStroke();
     if (selectedYears.length > 0) {
@@ -429,18 +314,14 @@ function Radial_FSME(p) {
     } else {
       p.fill(100, 110, 118);
     }
-    p.text("Filter löschen", 410, 59);
+    p.text("Filter löschen", cWidth -100, 32);
+    p.rectMode(p.CORNER);
   }
-
-
-
-
-
 
   //Jahr-Filter: Klicks
   p.mousePressed = function () {
     // Filter löschen
-    if (p.mouseX > 355 && p.mouseX < 465 && p.mouseY > 48 && p.mouseY < 70) {
+    if (p.mouseX > cWidth -120 && p.mouseX < cWidth - 20 && p.mouseY > 20 && p.mouseY < 40) {
       selectedYears = [];
       p.redraw();
       return;
@@ -489,7 +370,6 @@ function Radial_FSME(p) {
 
 
 
-
   //------- Klasse für Form --------
   class Shape {
     constructor(
@@ -501,7 +381,7 @@ function Radial_FSME(p) {
       maxValue,
       p,
       year,
-      c,
+      color
     ) {
       this.p = p;
       this.pos = p.createVector(x, y);
@@ -509,7 +389,7 @@ function Radial_FSME(p) {
       this.data = filteredData;
       this.points = [];
       this.values = [];
-      this.c = c;
+      this.c = color;
 
       let angle = 360 / numLines;
 
@@ -532,27 +412,25 @@ function Radial_FSME(p) {
       }
     }
 
-
-
-
-
-
-
-
-
     display() {
       const p = this.p;
 
       // Punkte verbinden
-      //oldest year is lightest.170 = transparency, so that the shapes and labels stay readable through the shape.
+      //oldest year is lightest.
+      //170 = transparency, so that the shapes and labels stay readable through the shape.
+      //Hauptfarbe FSME: 219, 39, 119
       p.fill(
-        p.lerp(150, 10, this.c / 255),
-        p.lerp(210, 60, this.c / 255),
-        p.lerp(235, 110, this.c / 255),
-        170,
+        //beim lerp immer von oben nach unten die Farben
+        //(lerp(hellsteFarbe, dunkelsteFarbe, this.c / 255))
+        p.lerp(249,131, this.c / 255),
+        p.lerp(168,24, this.c / 255),
+        p.lerp(212,67, this.c / 255),
+        170
       );
+
+
       //p.noStroke();
-      p.stroke(10, 60, 110);
+      p.stroke(131, 24, 67);
       //p.strokeWeight(0.5);
 
       p.beginShape();
@@ -573,10 +451,6 @@ function Radial_FSME(p) {
       }
     }
   }
-
-
-
-
 
 
 
