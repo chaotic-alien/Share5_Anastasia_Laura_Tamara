@@ -35,8 +35,8 @@ function Karte_FSME(p) {
   ];
 
   // colors - change these values to change the map colors
-  let brightest = [150, 210, 235];
-  let darkest = [10, 60, 110];
+  let brightest = [249, 168, 212];
+  let darkest = [131, 24, 67];
 
   // color of the lines between cantons
   let cantonBorderCol = [220, 220, 220];
@@ -293,7 +293,7 @@ function Karte_FSME(p) {
     // incidence value in popup
     let incidenceText = incidenceValue.toFixed(1);
 
-    p.fill(10, 60, 110);
+    p.fill(157, 23, 77);
     p.textSize(22);
     p.text(incidenceText, x + 16, y + 54);
     
@@ -411,12 +411,12 @@ function Karte_FSME(p) {
       p.text(rankingItem.canton, x, barY + 12);
 
       // background bar for reference
-      p.fill(220,229,233);
+      p.fill(252,231,243);
 
       p.rect(x + 35, barY, 190, 18, 3);
 
       // incidence bar - value
-      p.fill(10, 60, 110);
+      p.fill(190, 24, 93);
 
       let barWidth = p.map(rankingItem.incidence, 0, maxIncidence, 0, 190);
 
@@ -425,8 +425,7 @@ function Karte_FSME(p) {
       // value at the end
       p.fill(25, 45, 60);
       p.textAlign(p.RIGHT);
-
-      p.text(rankingItem.incidence.toFixed(1) + " Fälle", x + 300, barY + 8);
+      p.text(rankingItem.incidence.toFixed(1) , x + 270, barY + 8);
       p.textAlign(p.LEFT);
     }
   }
