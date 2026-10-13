@@ -51,10 +51,31 @@ function Radial_FSME(p) {
   //farbe im shape
   let c = 255;
 
+  //filter: ausgewählte Jahre (leer = alle Jahre)
+  let selectedYears = [];
+  let chipWidth = 30;
+  let chipGap = (430 - 13 * 30) / 12;
+
+  //dropdown: Position und Zustand
+  let dropdownOpen = false;
+  let dropdownX = 35;
+  let dropdownY = 80;
+  let dropdownW = 170;
+  let dropdownH = 24;
+  let rowH = 20;
+
+
+
+
+
+
+
+
+
   //------ Setup -------
   //async + await ersetzt die preload function
   p.setup = async function () {
-    p.createCanvas(500, 500);
+    p.createCanvas(500, 600);
     p.angleMode(p.DEGREES);
 
     data = await d3.csv("assets/FSME_oblig/data.csv");
@@ -88,21 +109,45 @@ function Radial_FSME(p) {
     //gui anzeigen
     gui.add(settings, "year", 1, 13, 1).onChange(updateYear);
     gui.add(settings, "allYears");
-
-    //slider
-    slider = p.createSlider(1, 13, 1, 1);
-    slider.size(p.width - 300);
-    slider.center("horizontal");
   };
+
+
+
+
+
+
+
+
+
+
 
   // -------- Draw ---------
   p.draw = function () {
-    p.background(255);
+    p.background(250);
+
+    // title
+    p.noStroke();
+    p.fill(25, 45, 60);
+    p.textAlign(p.LEFT, p.CENTER);
+    p.textSize(19);
+    p.textStyle(p.BOLD);
+    p.text("Zeitliche Entwicklung", 35, 35);
+
+    p.textStyle(p.NORMAL);
+    p.textSize(11);
+    p.fill(100, 110, 118);
+    p.text("Gemeldete Fälle pro Monat", 35, 59);
+
+
+    // diagram moves down to make room for the header
+    p.push();
+    p.translate(0, 100);
 
     //Shape zeichnen
     p.push();
-    p.translate(p.height / 2, p.width / 2);
-    shape.display(this);
+    p.translate(250, 250);
+    //shape.display(this);
+    drawSelectedYears();
     p.pop();
 
     //Zeichnet die Basis des Diagramms (Kreise und Striche)
@@ -110,11 +155,26 @@ function Radial_FSME(p) {
 
     //äusserster Kreis
     p.noFill();
-    p.ellipse(250, 250, 390);
+    p.stroke(220, 225, 228);
+    p.strokeWeight(1);
+    p.ellipse(250, 250, 400);
+
+    p.pop();
+
+    // filter is drawn last so the open list sits on top of the diagram
+    drawYearFilter();
 
     //Draw wird NICHT wiederholt
     p.noLoop();
   };
+
+
+
+
+
+
+
+
 
   // ----- Gui update on Change ----
   function updateYear(t) {
@@ -136,8 +196,20 @@ function Radial_FSME(p) {
     p.redraw();
   }
 
+
+
+
+
+
+
+
+
   //----- alle Jahre anzeigen (Gui Button) -------
   function allYears() {
+
+    // same offset as draw so shapes land on base
+    p.push();
+    p.translate(0, 100);
     for (let i = 13; i >= 1; i--) {
       //Farbe mappen nach Jahr
       c = p.map(i, 13, 1, 0, 255);
@@ -157,24 +229,34 @@ function Radial_FSME(p) {
 
       // Shapes zeichnen
       p.push();
-      p.translate(p.height / 2, p.width / 2);
+      p.translate(250, 250);
       shape.display(this);
       p.pop();
     }
 
     //Basis nochmal drüber legen
     drawBase();
+    p.pop();
   }
+
+
+
+
+
+
+
 
   // ------ Basis des Diagramms (Kreise und Striche) -------
   function drawBase() {
     p.push();
-    p.translate(p.width / 2, p.height / 2);
+    p.translate(250, 250);
 
     // Kreise attribute
     p.noFill();
-    p.stroke(180, 180, 180, 50);
+    p.stroke(220, 225, 228, 90);
     p.strokeWeight(1);
+    p.textStyle(p.NORMAL);
+    p.textSize(10);
 
     // rotate damit text nicht auf dem Strich liegt
     p.rotate(-step / 2);
@@ -189,28 +271,29 @@ function Radial_FSME(p) {
 
       // Beschriftung der Kreise
       p.noStroke();
-      p.fill(100, 100, 100, 80);
+      p.fill(100, 100, 118, 90);
       p.textAlign(p.CENTER, p.CENTER);
-      p.text(abstand, 0, -radius);
+      p.text(abstand, 0, -radius );
 
       p.noStroke();
-      p.fill(0, 0, 0, 30);
+      p.fill(100, 110, 118, 90);
       p.text(maxValue, 0, -lineLength);
 
       p.noFill();
-      p.stroke(180, 180, 180, 50);
+      p.stroke(220, 225, 228, 90);
     }
 
     p.rotate(step / 2);
 
     //Striche & Monat Beschriftung
-    p.fill(0);
+    p.fill(25, 45, 60);
+    p.textSize(11);
 
     for (let i = 0; i < numLines; i++) {
       p.noStroke();
       p.text(month[i], -10, -210);
 
-      p.stroke(0);
+      p.stroke(220, 225, 228, 90);
       p.line(0, -lineLength, 0, 0); // Draw line from the center outward
 
       p.rotate(step); // Rotate to next line
@@ -218,6 +301,194 @@ function Radial_FSME(p) {
 
     p.pop();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+  // Jahr-Filter ->Shapes der ausgewählten Jahre zeichnen
+  function drawSelectedYears() {
+    let list = [...selectedYears];
+
+    // nichts ausgewählt = alle Jahre
+    if (list.length === 0) {
+      for (let i = 1; i <= 13; i++) {
+        list.push(i);
+      }
+    }
+
+    // gleiche Reihenfolge und Farben wie bei allYears
+    list.sort((a, b) => b - a);
+
+    for (let i = 0; i < list.length; i++) {
+      let colorValue =
+        list.length === 1 ? 255 : p.map(i, 0, list.length - 1, 0, 255);
+
+      let yearShape = new Shape(
+        x,
+        y,
+        filteredData,
+        numLines,
+        lineLength,
+        maxValue,
+        p,
+        list[i],
+        colorValue,
+      );
+
+      yearShape.display();
+    }
+  }
+
+
+
+
+
+
+  //Draw Filter (dropdown)
+  function drawYearFilter() {
+    p.textStyle(p.NORMAL);
+    p.textSize(11);
+    p.textAlign(p.LEFT, p.CENTER);
+
+    // text in the closed dropdown
+    let label = "Alle Jahre";
+    if (selectedYears.length === 1) {
+      label = String(2012 + selectedYears[0]);
+    } else if (selectedYears.length > 1) {
+      label = selectedYears.length + " Jahre ausgewählt";
+    }
+
+    // dropdown header
+    p.fill(250);
+    p.stroke(220, 225, 228);
+    p.strokeWeight(1);
+    p.rect(dropdownX, dropdownY, dropdownW, dropdownH, 3);
+
+    p.noStroke();
+    p.fill(25, 45, 60);
+    p.text(label, dropdownX + 10, dropdownY + dropdownH / 2);
+
+    // small arrow on the right
+    p.fill(10, 60, 110);
+    let arrowX = dropdownX + dropdownW - 16;
+    let arrowY = dropdownY + dropdownH / 2;
+    if (dropdownOpen) {
+      p.triangle(arrowX, arrowY + 2, arrowX + 8, arrowY + 2, arrowX + 4, arrowY - 3);
+    } else {
+      p.triangle(arrowX, arrowY - 2, arrowX + 8, arrowY - 2, arrowX + 4, arrowY + 3);
+    }
+
+    // list of years, only when open
+    if (dropdownOpen) {
+      let listY = dropdownY + dropdownH + 2;
+
+      p.fill(255);
+      p.stroke(220, 225, 228);
+      p.strokeWeight(1);
+      p.rect(dropdownX, listY, dropdownW, 13 * rowH + 10, 3);
+
+      for (let i = 0; i < 13; i++) {
+        let rowY = listY + 5 + i * rowH;
+        let isSelected = selectedYears.includes(i + 1);
+
+        // checkbox
+        if (isSelected) {
+          p.noStroke();
+          p.fill(10, 60, 110);
+        } else {
+          p.stroke(220, 225, 228);
+          p.fill(255);
+        }
+        p.rect(dropdownX + 10, rowY + 4, 12, 12, 3);
+
+        // year
+        p.noStroke();
+        p.fill(25, 45, 60);
+        p.text(2013 + i, dropdownX + 32, rowY + rowH / 2);
+      }
+    }
+
+    // Clear all Button
+    p.textAlign(p.CENTER, p.CENTER);
+    p.fill(250);
+    p.stroke(220, 225, 228);
+    p.strokeWeight(1);
+    p.rect(355, 48, 110, 22, 3);
+
+    p.noStroke();
+    if (selectedYears.length > 0) {
+      p.fill(25, 45, 60);
+    } else {
+      p.fill(100, 110, 118);
+    }
+    p.text("Filter löschen", 410, 59);
+  }
+
+
+
+
+
+
+  //Jahr-Filter: Klicks
+  p.mousePressed = function () {
+    // Filter löschen
+    if (p.mouseX > 355 && p.mouseX < 465 && p.mouseY > 48 && p.mouseY < 70) {
+      selectedYears = [];
+      p.redraw();
+      return;
+    }
+
+    // Dropdown öffnen oder schliessen
+    if (
+      p.mouseX > dropdownX &&
+      p.mouseX < dropdownX + dropdownW &&
+      p.mouseY > dropdownY &&
+      p.mouseY < dropdownY + dropdownH
+    ) {
+      dropdownOpen = !dropdownOpen;
+      p.redraw();
+      return;
+    }
+
+    if (dropdownOpen) {
+      let listY = dropdownY + dropdownH + 2;
+
+      // Jahr ein oder ausschalten (Liste bleibt offen)
+      if (
+        p.mouseX > dropdownX &&
+        p.mouseX < dropdownX + dropdownW &&
+        p.mouseY > listY + 5 &&
+        p.mouseY < listY + 5 + 13 * rowH
+      ) {
+        let i = Math.floor((p.mouseY - (listY + 5)) / rowH);
+
+        if (selectedYears.includes(i + 1)) {
+          selectedYears = selectedYears.filter((year) => year !== i + 1);
+        } else {
+          selectedYears.push(i + 1);
+        }
+      } else {
+        // Klick ausserhalb schliesst die Liste
+        dropdownOpen = false;
+      }
+
+      p.redraw();
+    }
+  };
+
+
+
+
+
+
 
   //------- Klasse für Form --------
   class Shape {
@@ -261,13 +532,27 @@ function Radial_FSME(p) {
       }
     }
 
+
+
+
+
+
+
+
+
     display() {
       const p = this.p;
 
       // Punkte verbinden
-      p.fill(this.c, 0, 255);
+      //oldest year is lightest.170 = transparency, so that the shapes and labels stay readable through the shape.
+      p.fill(
+        p.lerp(150, 10, this.c / 255),
+        p.lerp(210, 60, this.c / 255),
+        p.lerp(235, 110, this.c / 255),
+        170,
+      );
       //p.noStroke();
-      p.stroke(0);
+      p.stroke(10, 60, 110);
       //p.strokeWeight(0.5);
 
       p.beginShape();
@@ -288,6 +573,14 @@ function Radial_FSME(p) {
       }
     }
   }
+
+
+
+
+
+
+
+
 
   //----- ab hier nicht anfassen! ---------
   //Grrr
