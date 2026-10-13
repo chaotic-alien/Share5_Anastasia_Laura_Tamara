@@ -537,20 +537,20 @@ a {
 
 #c_Radial_FSME {
   border: 1px solid magenta;
-  width: 500px;
+  width: 350px;
   height: 600px;
 }
 
 #c_Karte_FSME {
   border: 1px solid magenta;
-  width: 500px;
+  width: 350px;
   height: 1000px;
 }
 
 #c_AgeGroup_FSME {
   border: 1px solid magenta;
-  width: 500px;
-  height: 500px;
+  width: 350px;
+  height: 420px;
 }
 
 /* style the AGEGROUP slider */
@@ -561,9 +561,9 @@ a {
 /* position and style the slider */
 #c_AgeGroup_FSME input[type="range"] {
   position: absolute;
-  left: 120px;
-  top: 405px;
-  width: 290px;
+  left: 35px;
+  top: 365px;
+  width: 280px;
   height: 5px;
   margin: 0;
 
