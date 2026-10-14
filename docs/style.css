@@ -570,6 +570,18 @@ a {
   height: 420px;
 }
 
+.canvas-full-width {
+  box-sizing: border-box;
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.canvas-full-width canvas {
+  display: block;
+  margin: 0 auto;
+}
+
 /* style the AGEGROUP slider */
 #c_AgeGroup_FSME {
   position: relative;
@@ -615,7 +627,6 @@ a {
 /* style the KARTE slider */
 #c_Karte_FSME {
   position: relative;
-  width: 350px;
 }
 
 /* position and style the slider */
