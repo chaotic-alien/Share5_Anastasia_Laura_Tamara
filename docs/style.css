@@ -1,6 +1,3 @@
-
-
-
 :root {
   --schriftfarbe-bag: #1c2938;
   --schriftfarbe-bag-link: #4c1d95;
@@ -680,4 +677,8 @@ a {
 .Zeckenbutton svg {
   width: 130px;
   height: 130px;
+}
+
+canvas {
+  touch-action: pan-y; /* Erlaubt vertikales Scrollen auf dem Canvas */
 }
