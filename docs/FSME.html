@@ -1,224 +1,280 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BAG-Infoportal übertragbare Krankheiten</title>
+    <link rel="stylesheet" href="style.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BAG-Infoportal übertragbare Krankheiten</title>
-  <link rel="stylesheet" href="style.css" />
+    <script src="js/p5.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lil-gui@0.21.0/dist/lil-gui.umd.min.js"></script>
+  </head>
 
-  <script src="js/p5.min.js"></script>
-  <script src="js/d3.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lil-gui@0.21.0/dist/lil-gui.umd.min.js"></script>
-</head>
-
-<body>
-  <header class="site-header">
-    <!-- Dunkelblaue obere Leiste -->
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <span>Alle Schweizer Bundesbehörden</span>
-        <i class="fa-solid fa-chevron-down"></i>
-      </div>
-      <div class="top-bar-right">
-        <span>DE</span>
-        <i class="fa-solid fa-chevron-down"></i>
-      </div>
-    </div>
-
-    <!-- Weiße Haupt-Headerleiste -->
-    <div class="main-bar">
-      <a href="#" class="brand-container">
-        <img src="SVG/BundLogo.svg" alt="Bundeslogo" class="logo-desktop" />
-        <img src="SVG/BundLogo-mobile.svg" alt="Bundeslogo" class="logo-mobile" />
-
-        <div class="brand-divider"></div>
-
-        <div class="brand-text">
-          <span class="brand-title">
-            <span class="full-text">Bundesamt für Gesundheit BAG</span>
-            <span class="short-text">BAG</span>
-          </span>
-          <span class="brand-subtitle">
-            <span class="full-text">Infoportal übertragbare Krankheiten</span>
-            <span class="short-text">IDD</span>
-          </span>
+  <body>
+    <header class="site-header">
+      <!-- Dunkelblaue obere Leiste -->
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <span>Alle Schweizer Bundesbehörden</span>
+          <i class="fa-solid fa-chevron-down"></i>
         </div>
-      </a>
-
-      <!-- Menü-Button (Burger-Icon) -->
-      <button class="menu-button" aria-label="Menü öffnen">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-  </header>
-
-  <section class="Hauptinhalt">
-    <div class="Titel">Zeckenübertragene Krankheiten</div>
-
-    <!--Navigation Top-->
-    <nav class="navigation-top">
-      <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-          <!--!Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
-          <path
-            d="M342.6 41.4C330.1 28.9 309.8 28.9 297.3 41.4L169.3 169.4C156.8 181.9 156.8 202.2 169.3 214.7C181.8 227.2 202.1 227.2 214.6 214.7L288 141.3L288 576C288 593.7 302.3 608 320 608C337.7 608 352 593.7 352 576L352 141.3L425.4 214.7C437.9 227.2 458.2 227.2 470.7 214.7C483.2 202.2 483.2 181.9 470.7 169.4L342.7 41.4z" />
-        </svg></a>
-      <a href="FSME.html" class="FSME-active">FSME</a>
-      <a href="Tularaemie.html">Tularämie</a>
-      <a href="Borreliose.html">Borreliose</a>
-    </nav>
-
-    <div class="Untertitel">FSME (Frühsommer-Meningoenzephalitis)</div>
-
-    <p>
-      Die FSME ist eine virale Krankheit, die durch den Stich einer infektiösen Zecke übertragen wird. Die Impfung wird
-      Menschen ab 3 Jahren, die sich in Risikogebieten aufhalten, empfohlen. Das Tragen abschliessender Kleider und
-      Anwenden von Repellentien ist auch empfohlen.
-    </p>
-
-    <div class="KrankheitLink">
-      <a href="https://www.bag.admin.ch/de/fruehsommer-meningoenzephalitis-fsme" class="Link">Fachinformationen:
-        Detailseite zu FSME</a>
-      <div>
-        <svg viewBox="0 0 640 640">
-          <path
-            d="M384 64C366.3 64 352 78.3 352 96C352 113.7 366.3 128 384 128L466.7 128L265.3 329.4C252.8 341.9 252.8 362.2 265.3 374.7C277.8 387.2 298.1 387.2 310.6 374.7L512 173.3L512 256C512 273.7 526.3 288 544 288C561.7 288 576 273.7 576 256L576 96C576 78.3 561.7 64 544 64L384 64zM144 160C99.8 160 64 195.8 64 240L64 496C64 540.2 99.8 576 144 576L400 576C444.2 576 480 540.2 480 496L480 416C480 398.3 465.7 384 448 384C430.3 384 416 398.3 416 416L416 496C416 504.8 408.8 512 400 512L144 512C135.2 512 128 504.8 128 496L128 240C128 231.2 135.2 224 144 224L224 224C241.7 224 256 209.7 256 192C256 174.3 241.7 160 224 160L144 160z" />
-        </svg>
-      </div>
-
-    </div>
-    <div class="Untertitel-row">
-      <div class="Untertitel-text">
-        <div class="Untertitel">Zeitliche Entwicklung</div>
-        <div class="Ueberschrift-dünn">Gemeldete Fälle pro Monat</div>
-      </div>
-      <button id="audioButtonZeitlicheEntwicklung" class="Zeckenbutton" type="button"
-        data-audio-target="audioZeitlicheEntwicklung">
-        <img src="zecke.svg" alt="Zecken Icon" width="50" height="50">
-      </button>
-      <audio id="audioZeitlicheEntwicklung" src="Audio/FSME-Zeitliche_Entwicklung.mp3" preload="auto"></audio>
-
-
-
-    </div>
-
-    <div id="c_Radial_FSME"> </div>
-    <script src="p5/Radial_FSME.js"> </script>
-
-    <div class="Untertitel-row">
-      <div class="Untertitel-text">
-        <div class="Untertitel">Verteilung nach Kantone</div>
-        <div class="Ueberschrift-dünn">Fälle pro 100'000 Einwohner</div>
-      </div>
-      <button id="audioButtonKantone" class="Zeckenbutton" type="button" data-audio-target="audioKantone">
-        <img src="zecke.svg" alt="Zecken Icon" width="50" height="50">
-      </button>
-      <audio id="audioKantone" src="Audio/FSME-Verteilung_nach_Kantone.mp3" preload="auto"></audio>
-    </div>
-
-    <div id="c_Karte_FSME"> </div>
-    <script src="p5/Karte_FSME.js"> </script>
-
-    <div class="Untertitel-row">
-      <div class="Untertitel-text">
-        <div class="Untertitel">Verteilung nach Altersklassen</div>
-        <div class="Ueberschrift-dünn">Durchschnittliche Fälle pro 1 Millionen Einwohner:innen der letzten 10 Jahre
+        <div class="top-bar-right">
+          <span>DE</span>
+          <i class="fa-solid fa-chevron-down"></i>
         </div>
       </div>
-      <button id="audioButtonAltersklassen" class="Zeckenbutton" type="button" data-audio-target="audioAltersklassen">
-        <img src="zecke.svg" alt="Zecken Icon" width="50" height="50">
-      </button>
-      <audio id="audioAltersklassen" src="Audio/FSME-Verteilung_nach_Alter.mp3" preload="auto"></audio>
 
-      <script>
-        document.querySelectorAll('.Zeckenbutton').forEach(button => {
-          button.addEventListener('click', () => {
-            const audio = document.getElementById(button.dataset.audioTarget);
-            audio.currentTime = 0;
-            audio.play().catch(error => {
-              console.error('Audio konnte nicht abgespielt werden:', error);
-            });
-          });
-        });
-      </script>
-    </div>
+      <!-- Weiße Haupt-Headerleiste -->
+      <div class="main-bar">
+        <a href="#" class="brand-container">
+          <img src="SVG/BundLogo.svg" alt="Bundeslogo" class="logo-desktop" />
+          <img
+            src="SVG/BundLogo-mobile.svg"
+            alt="Bundeslogo"
+            class="logo-mobile"
+          />
 
+          <div class="brand-divider"></div>
 
+          <div class="brand-text">
+            <span class="brand-title">
+              <span class="full-text">Bundesamt für Gesundheit BAG</span>
+              <span class="short-text">BAG</span>
+            </span>
+            <span class="brand-subtitle">
+              <span class="full-text">Infoportal übertragbare Krankheiten</span>
+              <span class="short-text">IDD</span>
+            </span>
+          </div>
+        </a>
 
-    <div id="c_AgeGroup_FSME"> </div>
-    <script src="p5/AgeGroup_FSME.js"> </script>
-
-    <div class="Untertitel">Kurze Infos</div>
-
-    <div class="info-box">
-      <div class="info-box-image bg-color-fsme">
-          <!-- Das Icon/Bild links -->
-          <img src=" SVG/Erreger.svg" alt="Icon" />
-    </div>
-    <div class="info-box-content">
-      <span class="category">Erreger & Übertragung</span>
-      <h3 class="title">Virus</h3>
-      <p class="description">
-        Übertragung meist durch den Stich einer infizierten Zecke.
-      </p>
-    </div>
-    </div>
-    <div class="info-box">
-      <div class="info-box-image bg-color-fsme">
-          <!-- Das Icon/Bild links -->
-          <img src=" SVG/Temperatur.svg" alt="Icon" />
-    </div>
-    <div class="info-box-content">
-      <span class="category">Typische Symptome</span>
-      <h3 class="title">Fiber & Kopfschmerzen</h3>
-      <p class="description">
-        In schweren Fällen kann sich das Nervensystem entzünden.
-      </p>
-    </div>
-    </div>
-    <div class="info-box">
-      <div class="info-box-image bg-color-fsme">
-        <!-- Das Icon/Bild links -->
-        <img src="SVG/Schutz.svg" alt="Icon" />
+        <!-- Menü-Button (Burger-Icon) -->
+        <button class="menu-button" aria-label="Menü öffnen">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
-      <div class="info-box-content">
-        <span class="category">Schutz & Erste Hilfe</span>
-        <h3 class="title">Impfen & Stiche vermeiden</h3>
-        <p class="description">
-          Geschlossene Kleidung, Repellent und Körperkontrolle
-        </p>
+    </header>
+
+    <section class="Hauptinhalt">
+      <div class="Titel">Zeckenübertragene Krankheiten</div>
+
+      <!--Navigation Top-->
+      <nav class="navigation-top">
+        <a href="index.html"
+          ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <!--!Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+            <path
+              d="M342.6 41.4C330.1 28.9 309.8 28.9 297.3 41.4L169.3 169.4C156.8 181.9 156.8 202.2 169.3 214.7C181.8 227.2 202.1 227.2 214.6 214.7L288 141.3L288 576C288 593.7 302.3 608 320 608C337.7 608 352 593.7 352 576L352 141.3L425.4 214.7C437.9 227.2 458.2 227.2 470.7 214.7C483.2 202.2 483.2 181.9 470.7 169.4L342.7 41.4z"
+            /></svg
+        ></a>
+        <a href="FSME.html" class="FSME-active">FSME</a>
+        <a href="Tularaemie.html">Tularämie</a>
+        <a href="Borreliose.html">Borreliose</a>
+      </nav>
+
+      <div class="Untertitel">FSME (Frühsommer-Meningoenzephalitis)</div>
+
+      <p>
+        Die FSME ist eine virale Krankheit, die durch den Stich einer
+        infektiösen Zecke übertragen wird. Die Impfung wird Menschen ab 3
+        Jahren, die sich in Risikogebieten aufhalten, empfohlen. Das Tragen
+        abschliessender Kleider und Anwenden von Repellentien ist auch
+        empfohlen.
+      </p>
+
+      <div class="KrankheitLink">
+        <a
+          href="https://www.bag.admin.ch/de/fruehsommer-meningoenzephalitis-fsme"
+          class="Link"
+          >Fachinformationen: Detailseite zu FSME</a
+        >
+        <div>
+          <svg viewBox="0 0 640 640">
+            <path
+              d="M384 64C366.3 64 352 78.3 352 96C352 113.7 366.3 128 384 128L466.7 128L265.3 329.4C252.8 341.9 252.8 362.2 265.3 374.7C277.8 387.2 298.1 387.2 310.6 374.7L512 173.3L512 256C512 273.7 526.3 288 544 288C561.7 288 576 273.7 576 256L576 96C576 78.3 561.7 64 544 64L384 64zM144 160C99.8 160 64 195.8 64 240L64 496C64 540.2 99.8 576 144 576L400 576C444.2 576 480 540.2 480 496L480 416C480 398.3 465.7 384 448 384C430.3 384 416 398.3 416 416L416 496C416 504.8 408.8 512 400 512L144 512C135.2 512 128 504.8 128 496L128 240C128 231.2 135.2 224 144 224L224 224C241.7 224 256 209.7 256 192C256 174.3 241.7 160 224 160L144 160z"
+            />
+          </svg>
+        </div>
       </div>
-    </div>
+      <div class="Untertitel-row">
+        <div class="Untertitel-text">
+          <div class="Untertitel">Zeitliche Entwicklung</div>
+          <div class="Ueberschrift-dünn">Gemeldete Fälle pro Monat</div>
+        </div>
+        <button
+          id="audioButtonZeitlicheEntwicklung"
+          class="Zeckenbutton"
+          type="button"
+          data-audio-target="audioZeitlicheEntwicklung"
+        >
+          <img src="zecke.svg" alt="Zecken Icon" width="50" height="50" />
+        </button>
+        <audio
+          id="audioZeitlicheEntwicklung"
+          src="Audio/FSME-Zeitliche_Entwicklung.mp3"
+          preload="auto"
+        ></audio>
+      </div>
 
-    <div class="Untertitel">Downloads</div>
+      <div id="c_Radial_FSME"></div>
+      <script src="p5/Radial_FSME.js"></script>
 
-    <section id="content">
+      <div class="Untertitel-row">
+        <div class="Untertitel-text">
+          <div class="Untertitel">Verteilung nach Kantone</div>
+          <div class="Ueberschrift-dünn">Fälle pro 100'000 Einwohner</div>
+        </div>
+        <button
+          id="audioButtonKantone"
+          class="Zeckenbutton"
+          type="button"
+          data-audio-target="audioKantone"
+        >
+          <img src="zecke.svg" alt="Zecken Icon" width="50" height="50" />
+        </button>
+        <audio
+          id="audioKantone"
+          src="Audio/FSME-Verteilung_nach_Kantone.mp3"
+          preload="auto"
+        ></audio>
+      </div>
 
-      <a href="https://www.idd.bag.admin.ch/api/v1/export/latest/TBE_oblig/zip">
-        <div class="KrankheitLink">
-          <div>CSV Rohdaten</div>
-          <div> <svg width="21" height="25" viewBox="0 0 21 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M21 13.7845L10.5032 19.8516L0 13.7877L0.553309 12.8162L9.94026 18.2367V0H11.0597V18.2367L20.4467 12.8162L21 13.7845Z"
-                fill="black" />
-              <path d="M20.0285 24.1815H1.00371L1.00049 23.062H20.0414L20.0285 24.1815Z" fill="black" />
-            </svg>
+      <div id="c_Karte_FSME"></div>
+      <script src="p5/Karte_FSME.js"></script>
+
+      <div class="Untertitel-row">
+        <div class="Untertitel-text">
+          <div class="Untertitel">Verteilung nach Altersklassen</div>
+          <div class="Ueberschrift-dünn">
+            Durchschnittliche Fälle pro 1 Millionen Einwohner:innen der letzten
+            10 Jahre
           </div>
         </div>
-      </a>
+        <button
+          id="audioButtonAltersklassen"
+          class="Zeckenbutton"
+          type="button"
+          data-audio-target="audioAltersklassen"
+        >
+          <img src="zecke.svg" alt="Zecken Icon" width="50" height="50" />
+        </button>
+        <audio
+          id="audioAltersklassen"
+          src="Audio/FSME-Verteilung_nach_Alter.mp3"
+          preload="auto"
+        ></audio>
 
-      <div class="Trennlinie"></div>
+        <script>
+          document.querySelectorAll(".Zeckenbutton").forEach((button) => {
+            button.addEventListener("click", () => {
+              const audio = document.getElementById(button.dataset.audioTarget);
+              audio.currentTime = 0;
+              audio.play().catch((error) => {
+                console.error("Audio konnte nicht abgespielt werden:", error);
+              });
+            });
+          });
+        </script>
+      </div>
 
+      <div id="c_AgeGroup_FSME"></div>
+      <script src="p5/AgeGroup_FSME.js"></script>
 
+      <div class="Untertitel">Kurze Infos</div>
+
+      <div class="info-box">
+        <div class="info-box-image bg-color-fsme">
+          <!-- Das Icon/Bild links -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <!--!Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+            <path
+              d="M360 104C360 81.9 342.1 64 320 64C297.9 64 280 81.9 280 104C280 148.1 226.7 170.1 195.5 139C179.9 123.4 154.6 123.4 138.9 139C123.2 154.6 123.3 179.9 138.9 195.6C170.1 226.8 148 280.1 103.9 280.1C81.8 280.1 63.9 298 63.9 320.1C63.9 342.2 81.8 360.1 103.9 360.1C148 360.1 170 413.4 138.9 444.6C123.3 460.2 123.3 485.5 138.9 501.2C154.5 516.9 179.8 516.8 195.5 501.2C226.7 470 280 492.1 280 536.2C280 558.3 297.9 576.2 320 576.2C342.1 576.2 360 558.3 360 536.2C360 492.1 413.3 470.1 444.5 501.2C460.1 516.8 485.4 516.8 501.1 501.2C516.8 485.6 516.7 460.3 501.1 444.6C469.9 413.4 492 360.1 536.1 360.1C558.2 360.1 576.1 342.2 576.1 320.1C576.1 298 558.2 280.1 536.1 280.1C492 280.1 470 226.8 501.1 195.6C516.7 180 516.7 154.7 501.1 139C485.5 123.3 460.2 123.4 444.5 139C413.3 170.1 360 148.1 360 104zM224 288C224 270.3 238.3 256 256 256C273.7 256 288 270.3 288 288C288 305.7 273.7 320 256 320C238.3 320 224 305.7 224 288zM384 320C401.7 320 416 334.3 416 352C416 369.7 401.7 384 384 384C366.3 384 352 369.7 352 352C352 334.3 366.3 320 384 320z"
+            />
+          </svg>
+        </div>
+        <div class="info-box-content">
+          <span class="category">Erreger & Übertragung</span>
+          <h3 class="title">Virus</h3>
+          <p class="description">
+            Übertragung meist durch den Stich einer infizierten Zecke.
+          </p>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-image bg-color-fsme">
+          <!-- Das Icon/Bild links -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <!--!Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+            <path
+              d="M320 64C267 64 224 107 224 160L224 324.7C194.5 351 176 389.4 176 432C176 511.5 240.5 576 320 576C399.5 576 464 511.5 464 432C464 389.4 445.5 351 416 324.7L416 160C416 107 373 64 320 64zM384 432C384 467.3 355.3 496 320 496C284.7 496 256 467.3 256 432C256 405.1 272.5 382.1 296 372.7L296 216C296 202.7 306.7 192 320 192C333.3 192 344 202.7 344 216L344 372.7C367.5 382.2 384 405.2 384 432z"
+            />
+          </svg>
+        </div>
+        <div class="info-box-content">
+          <span class="category">Typische Symptome</span>
+          <h3 class="title">Fieber & Kopfschmerzen</h3>
+          <p class="description">
+            In schweren Fällen kann sich das Nervensystem entzünden.
+          </p>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-image bg-color-fsme">
+          <!-- Das Icon/Bild links -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <!--!Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+            <path
+              d="M320 64C324.6 64 329.2 65 333.4 66.9L521.8 146.8C543.8 156.1 560.2 177.8 560.1 204C559.6 303.2 518.8 484.7 346.5 567.2C329.8 575.2 310.4 575.2 293.7 567.2C121.3 484.7 80.6 303.2 80.1 204C80 177.8 96.4 156.1 118.4 146.8L306.7 66.9C310.9 65 315.4 64 320 64zM320 130.8L320 508.9C458 442.1 495.1 294.1 496 205.5L320 130.9L320 130.9z"
+            />
+          </svg>
+        </div>
+        <div class="info-box-content">
+          <span class="category">Schutz & Erste Hilfe</span>
+          <h3 class="title">Impfen & Stiche vermeiden</h3>
+          <p class="description">
+            Geschlossene Kleidung, Repellent und Körperkontrolle
+          </p>
+        </div>
+      </div>
+
+      <div class="Untertitel">Downloads</div>
+
+      <section id="content">
+        <a
+          href="https://www.idd.bag.admin.ch/api/v1/export/latest/TBE_oblig/zip"
+        >
+          <div class="KrankheitLink">
+            <div>CSV Rohdaten</div>
+            <div>
+              <svg
+                width="21"
+                height="25"
+                viewBox="0 0 21 25"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 13.7845L10.5032 19.8516L0 13.7877L0.553309 12.8162L9.94026 18.2367V0H11.0597V18.2367L20.4467 12.8162L21 13.7845Z"
+                  fill="black"
+                />
+                <path
+                  d="M20.0285 24.1815H1.00371L1.00049 23.062H20.0414L20.0285 24.1815Z"
+                  fill="black"
+                />
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <div class="Trennlinie"></div>
+      </section>
     </section>
-
-  </section>
-  <footer class="footer">
-    <span>Rechtliches</span>
-    <span>Datenschutz</span>
-    <span>Impressum</span>
-    <span>Release Notes</span>
-  </footer>
-</body>
-
+    <footer class="footer">
+      <span>Rechtliches</span>
+      <span>Datenschutz</span>
+      <span>Impressum</span>
+      <span>Release Notes</span>
+    </footer>
+  </body>
 </html>

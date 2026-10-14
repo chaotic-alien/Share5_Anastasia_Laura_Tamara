@@ -493,23 +493,25 @@ a {
   gap: 20px; /* Abstand zwischen Bild und Text */
   font-family: Arial, sans-serif;
   max-width: 500px; /* Maximale Breite der Box */
-  padding: 20px;
+  padding-top: 20px;
 }
 
 /* Bild-Bereich links */
-.info-box-image img {
-  width: 60px; /* Anpassen nach Bedarf */
-  height: 60px;
+.info-box-image svg {
+  width: 30px; /* Anpassen nach Bedarf */
+  height: 30px;
+  color: var(--farbe-fsme); /* Farbe für das SVG */
+  fill: currentColor;
   align-self: flex-start; /* Bild oben ausrichten */
   object-fit: cover;
   border-radius: 4px; /* Leichte Abrundung der Ecken */
-  padding: 20px; /* Innenabstand für das Bild */
+  padding: 10px; /* Innenabstand für das Bild */
 
   display: block;
 }
 
 .info-box-image.bg-color-fsme {
-  background-color: var(--farbe-fsme); /* Gelb */
+  background-color: var(--farbe-fsme-hell); /* Pink */
   border-radius: 4px;
 }
 
