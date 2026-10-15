@@ -3,7 +3,7 @@ function Radial_FSME(p) {
 
   //... Canvas anpassung ...
   //hier alle grössenänderungen machen! -> alles hängt mit diesen grössen zusammen :)
-  let cWidth = 350;
+  let cWidth = 370;
   let cHeigth = 400;
 
   //... daten ...
@@ -102,6 +102,7 @@ function Radial_FSME(p) {
     //Shape zeichnen
     p.push();
     p.translate(cWidth/2, cHeigth/2);
+    p.rotate(+step / 2);
     //shape.display(this);
     drawSelectedYears();
     p.pop();
@@ -125,12 +126,14 @@ function Radial_FSME(p) {
 
   // ------ Basis des Diagramms (Kreise und Striche) -------
   function drawBase() {
+
     p.push();
     p.translate(cWidth/2, cHeigth/2);
+    p.rotate(+step / 2);
 
     // Kreise attribute
     p.noFill();
-    p.stroke(220, 225, 228, 90);
+    p.stroke(211,221,235, 100);
     p.strokeWeight(1);
     p.textStyle(p.NORMAL);
     p.textSize(10);
@@ -148,31 +151,30 @@ function Radial_FSME(p) {
 
       // Beschriftung der Kreise
       p.noStroke();
-      p.fill(100, 100, 118, 90);
+      p.fill(31,41,55);
       p.textAlign(p.CENTER, p.CENTER);
-      p.text(abstand, 0, -radius);
-      
-
-      //Beschriftung des maximalen Wertes
-      p.noStroke();
-      p.fill(100, 110, 118, 90);
-      p.text(maxValue, 0, -lineLength-5);
+      p.text(abstand, 0, -radius - 5);
 
       p.noFill();
-      p.stroke(220, 225, 228, 90);
+      p.stroke(170,175,190,100);
     }
+
+    //Beschriftung des maximalen Wertes
+    p.noStroke();
+    p.fill(31,41,55);
+    p.text(maxValue, 0, -lineLength -5);
 
     p.rotate(step / 2);
 
     //Striche & Monate Beschriftung
-    p.fill(25, 45, 60);
+    p.fill(31,41,55);
     p.textSize(11);
 
     for (let i = 0; i < numLines; i++) {
       p.noStroke();
-      p.text(month[i], 0, -lineLength - 10); // Draw month label above the line
+      p.text(month[i], 0, -lineLength -10); // Draw month label above the line
 
-      p.stroke(220, 225, 228, 90);
+      p.stroke(0);
       p.line(0, -lineLength, 0, 0); // Draw line from the center outward
 
       p.rotate(step); // Rotate to next line
@@ -180,7 +182,7 @@ function Radial_FSME(p) {
 
     //äusserster Kreis
     p.noFill();
-    p.stroke(220, 225, 228);
+    p.stroke(31,41,55);
     p.strokeWeight(1);
     p.ellipse(0, 0, lineLength * 2);
 
