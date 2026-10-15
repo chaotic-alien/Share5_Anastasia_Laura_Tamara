@@ -405,6 +405,7 @@ a {
 .KrankheitLink svg {
   width: 24px;
   height: 24px;
+  color: var(--schriftfarbe-bag-link); /* Standardfarbe für das SVG */
 }
 .Trennlinie {
   border-top: 1px solid #ccc;
