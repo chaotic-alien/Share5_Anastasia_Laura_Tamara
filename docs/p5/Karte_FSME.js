@@ -457,7 +457,7 @@ function Karte_FSME(p) {
     p.noStroke();
     p.textAlign(p.LEFT);
     p.textStyle(p.NORMAL);
-    p.textSize(11);
+    p.textSize(10);
     p.fill(100, 110, 118);
     p.text("Top 5 Kantone", x, y + 20);
 
