@@ -278,22 +278,36 @@ p {
 
 /* Button: Ordnet die divs INNERHALB des Buttons NEBENEINANDER an */
 .ButtonsK {
-  display: flex; /* Nebeneinander für die Inhalte im Button */
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center; /* Vertikal zentrieren */
-  justify-content: space-between; /* Abstand zwischen den Elementen */
-
+  column-gap: 10px;
   padding: 10px 16px;
   margin-bottom: 0.25rem;
   margin-top: 0.25rem;
   cursor: pointer;
-  border: 0.5px solid #858585;
+  border: 0.1px solid rgba(170, 175, 190, 100);
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: -4px 4px 10px 0 rgba(0, 0, 0, 0.05);
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease; /* Sanfte Animation beim Hover */
+}
+
+.ButtonsK .Lauftext-bold {
+  min-width: 0;
+}
+
+.ButtonsK .Trendbereich {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-self: center;
+}
+
+.ButtonsK > a {
+  justify-self: end;
 }
 
 .ButtonsK:hover {
@@ -327,27 +341,20 @@ p {
   transform: scale(1.05); /* Vergrößert den Button leicht beim Hover */
 }
 
-.Krankheit-Tularaemie {
-  color: schriftfarbe-bag;
-  font-weight: bold;
-}
-
 .Bennenung-Trend-Tularaemie {
   color: var(--farbe-tularaemie);
-  font-weight: lighter;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
 }
 
 .Trend-Icon-Tularaemie {
   color: var(--farbe-tularaemie-hell);
-  height: 5vh;
-  width: 5vh;
+  height: 3vh;
+  width: 3vh;
 }
 
 .Meldesystem-Tularaemie {
   color: var(--farbe-tularaemie);
-  font-weight: lighter;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
   background-color: var(--farbe-tularaemie-hell);
   border-radius: 10px;
   padding: 5px 10px;
@@ -360,27 +367,20 @@ p {
   transform: scale(1.05); /* Vergrößert den Button leicht beim Hover */
 }
 
-.Krankheit-Borreliose {
-  color: schriftfarbe-bag;
-  font-weight: bold;
-}
-
 .Bennenung-Trend-Borreliose {
   color: var(--farbe-borreliose);
-  font-weight: lighter;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
 }
 
 .Trend-Icon-Borreliose {
   color: var(--farbe-borreliose-hell);
-  height: 5vh;
-  width: 5vh;
+  height: 3vh;
+  width: 3vh;
 }
 
 .Meldesystem-Borreliose {
   color: var(--farbe-borreliose);
-  font-weight: lighter;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
   background-color: var(--farbe-borreliose-hell);
   border-radius: 10px;
   padding: 5px 10px;
