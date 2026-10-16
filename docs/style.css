@@ -393,8 +393,7 @@ p {
   transform: scale(1.05); /* Vergrößert den Button leicht beim Hover */
 }
 
-#content {
-  margin-top: 20px;
+.content {
   padding: 0px;
   /*background-color: #ffffff;*/
   /* border: 1px solid #ccc;*/
@@ -402,9 +401,9 @@ p {
 }
 
 #contentInfos {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #ffffff;
+  margin-top: 10px;
+  padding: 0px;
+  background-color: #741b1b;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
@@ -428,14 +427,14 @@ a {
 }
 
 .KrankheitLink svg {
-  width: 24px;
-  height: 24px;
+  width: 4vw;
+  height: 3vh;
   color: var(--schriftfarbe-bag-link); /* Standardfarbe für das SVG */
 }
 
 .Trennlinie {
   border-top: 1px solid #ccc;
-  margin: 20px 0;
+  margin: 0.5rem 0;
 }
 
 .TitelButton {
@@ -454,6 +453,7 @@ a {
   padding: 16px 32px; /* Innenabstand oben/unten und links/rechts */
   font-family: sans-serif;
   font-size: 14px;
+  margin-top: 2rem; /* Abstand zum oberen Inhalt */
 }
 
 .navigation-top {
