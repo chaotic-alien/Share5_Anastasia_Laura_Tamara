@@ -768,6 +768,33 @@ a {
   transition: transform 0.3s ease; /* Sanfte Animation beim Hover */
 }
 
+@keyframes elastic-bounce {
+  0%,
+  16.67%,
+  50%,
+  66.67%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  5%,
+  55% {
+    transform: translateY(-18px) scale(0.95, 1.05);
+  }
+  8.33%,
+  58.33% {
+    transform: translateY(0) scale(1.08, 0.92);
+  }
+  10.83%,
+  60.83% {
+    transform: translateY(-6px) scale(0.98, 1.02);
+  }
+}
+
+.lupe-img {
+  display: inline-block;
+  animation: elastic-bounce 3s ease infinite;
+}
+
 .Zeckenbutton svg {
   width: 130px;
   height: 130px;
