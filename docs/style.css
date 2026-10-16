@@ -1,12 +1,12 @@
 :root {
   --schriftfarbe-bag: #1c2938;
   --schriftfarbe-bag-link: #4c1d95;
-  --farbe-fsme: #db2777;
-  --farbe-fsme-hell: #f9a8d4;
-  --farbe-tularaemie: #059669;
-  --farbe-tularaemie-hell: #6ee7b7;
-  --farbe-borreliose: #d97706;
-  --farbe-borreliose-hell: #fcd34d;
+  --farbe-fsme: #9d174d;
+  --farbe-fsme-hell: #fbcfe8;
+  --farbe-tularaemie: #065f46;
+  --farbe-tularaemie-hell: #a7f3d0;
+  --farbe-borreliose: #92400e;
+  --farbe-borreliose-hell: #fde68a;
 }
 
 * {
@@ -324,6 +324,7 @@ p {
   color: var(--farbe-fsme-hell);
   height: 3vh;
   width: 3vh;
+  rotate: 90deg; /* Dreht den Pfeil um 90 Grad */
 }
 
 .Meldesystem-FSME {
@@ -350,6 +351,7 @@ p {
   color: var(--farbe-tularaemie-hell);
   height: 3vh;
   width: 3vh;
+  rotate: 90deg; /* Dreht den Pfeil um 90 Grad */
 }
 
 .Meldesystem-Tularaemie {
@@ -376,6 +378,13 @@ p {
   color: var(--farbe-borreliose-hell);
   height: 3vh;
   width: 3vh;
+  rotate: 90deg; /* Dreht den Pfeil um 90 Grad */
+}
+
+.Trend-Icon-FSME svg,
+.Trend-Icon-Tularaemie svg,
+.Trend-Icon-Borreliose svg {
+  fill: currentColor;
 }
 
 .Meldesystem-Borreliose {
