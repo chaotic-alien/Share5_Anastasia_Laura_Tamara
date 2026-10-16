@@ -63,6 +63,9 @@ function Karte_FSME(p) {
   // selected canton -> starts with no canton selected
   let selectedCanton = null;
 
+  // vertical position of the map (between the legend and the slider)
+  let mapTop = 110;
+  let mapBottom = 346;
 
 
 
@@ -154,11 +157,10 @@ function Karte_FSME(p) {
 
 
   function drawMap() {
-    // map size and position
+    // map size 
     let mapLeft = 0;
     let mapRight = p.width;
-    let mapTop = 140;
-    let mapBottom = 376;
+
 
     // loop through every canton in the geojson
     for (let feature of mapData.features) {
@@ -266,7 +268,7 @@ function Karte_FSME(p) {
     // show a hint card so it's clear that cantons can be clicked
     if (selectedCanton === null) {
       let hintX = 0;
-      let hintY = 20;
+      let hintY = 1;
 
       p.fill(255);
       p.stroke(220, 225, 228);
@@ -304,7 +306,7 @@ function Karte_FSME(p) {
 
     // popup position
     let x = p.width - margin - bubbleWidth;
-    let y = 20;
+    let y = 1;
 
     // popup style (how it looks)
     p.fill(255);
@@ -395,7 +397,7 @@ function Karte_FSME(p) {
     // legend position
     let margin = 0;
     let x = margin;
-    let y = 110;
+    let y = 90;
     let legendWidth = 125;
 
     p.textSize(10);
@@ -499,7 +501,21 @@ function Karte_FSME(p) {
       p.rect(x + 35, barY, 300, 20, 3);
 
       // incidence bar - value
-      p.fill(157, 23, 77);
+      let cantonColor;
+
+      if (rankingItem.incidence === 0) {
+        cantonColor = p.color(220);
+      } else {
+        let colorAmount = Math.sqrt(rankingItem.incidence / maxIncidence);
+
+        cantonColor = p.lerpColor(
+          p.color(brightest),
+          p.color(darkest),
+          colorAmount,
+        );
+      }
+
+      p.fill(cantonColor);
 
       let barWidth = p.map(rankingItem.incidence, 0, maxIncidence, 0, 300);
 
@@ -531,7 +547,7 @@ function Karte_FSME(p) {
   p.mousePressed = function () {
 
     // ignore clicks in the year slider area
-    if (p.mouseY < 140 || p.mouseY > 376) {
+    if (p.mouseY < mapTop || p.mouseY > mapBottom) {
       return;
     }
 
@@ -581,11 +597,11 @@ function Karte_FSME(p) {
           // convert geo coordinates into canvas coordinates
           let pointX = p.map(points[i][0], 5.8, 10.6, 0, p.width);
 
-          let pointY = p.map(points[i][1], 45.8, 47.9, 376, 140);
+          let pointY = p.map(points[i][1], 45.8, 47.9, mapBottom, mapTop);
 
           let previousX = p.map(points[j][0], 5.8, 10.6, 0, p.width);
 
-          let previousY = p.map(points[j][1], 45.8, 47.9, 376, 140);
+          let previousY = p.map(points[j][1], 45.8, 47.9, mapBottom, mapTop);
 
           // check whether the mouse crossed the polygon boundary
           if (

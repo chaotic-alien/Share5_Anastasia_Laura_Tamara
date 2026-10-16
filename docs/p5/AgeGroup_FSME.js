@@ -1,69 +1,64 @@
 // To convert everything to work with D3 language, I asked AI help translate my original var
-// I went step by step to make sure the code works as intended. I also added comments to explain what each part does.
+// I went step by step to make sure the code works as intended.
+// I also added comments to explain what each part does.
 
 function AgeGroup_FSME(p) {
-
 
   let data;
 
   // Font
   let font;
 
-
-  // labels
+  // Labels
   let ages = ["0 - 16", "17 - 44", "45 - 64", "65 - 84", "85+"];
 
   let years = ["2022", "2023", "2024", "2025"];
 
+  // Pink color scale
+  let brightestBlue = [251, 207, 232];
+  let darkestBlue = [157, 23, 77];
 
-  //Pink Now 
-  let brightestBlue = [249, 168, 212];
-  let darkestBlue = [131, 24, 67];
+  // Circle size
+  let circleSize = 100;
 
-  // values
+  // Values
   let vals = [[], [], [], []];
   let maxValue = 1;
 
-  // random dot positions for each age group
-  let dotPositions = [[], [], [], [], []];
-
-  // slider
+  // Slider
   let yearSlider;
   let currentYear = 3;
 
-  // async + await ersetzt die preload function
+
+  // async + await replaces the preload function
   p.setup = async function () {
 
-
-
-    // wait until csv completely loaded
+    // Wait until CSV is completely loaded
     data = await d3.csv("assets/FSME_oblig/data.csv");
-
 
     font = await p.loadFont("assets/fonts/NotoSans-Regular.ttf");
     p.textFont(font);
     p.textSize(16);
 
-
-    let canvas = p.createCanvas(350, 420);
+    let canvas = p.createCanvas(370, 420);
     canvas.parent("c_AgeGroup_FSME");
+
     p.noLoop();
     p.angleMode(p.DEGREES);
 
-
-    // create year slider – Asked Co-Pilot to create it
+    // Create year slider
     yearSlider = p.createSlider(0, 3, currentYear, 1);
     yearSlider.parent("c_AgeGroup_FSME");
 
     yearSlider.input(function () {
-      currentYear = yearSlider.value();
+      currentYear = Number(yearSlider.value());
       p.redraw();
     });
 
-    // loop through each row
+    // Loop through each row
     for (let row of data) {
 
-      // filter cases 10y mean 
+      // Filter 10-year average cases
       if (
         row.valueCategory === "cases_10y_mean" &&
         row.temporal_type === "year" &&
@@ -74,58 +69,24 @@ function AgeGroup_FSME(p) {
         let a = ages.indexOf(row.agegroup);
         let incValue = Number(row.incValue);
 
-        // save value in correct position in values array
-        if (
-          y !== -1 &&
-          a !== -1 &&
-          row.incValue != null &&
-          String(row.incValue).trim() !== "" &&
-          Number.isFinite(incValue)
-        ) {
+        // Save value in the correct position in the values array
+        if (y !== -1
+          && a !== -1
+          && row.incValue != null
+          && String(row.incValue).trim() !== ""
+          && Number.isFinite(incValue)) {
           vals[y][a] = incValue * 10;
         }
       }
     }
 
-    // find highest valid value for the color scale
-    let validValues = vals.flat().filter(val => Number.isFinite(val));
-    maxValue = d3.max(validValues) || 1;
-
-    // create random dot positions inside each circle
-    for (let a = 0; a < ages.length; a++) {
-
-      while (dotPositions[a].length < 60) {
-
-        let angle = p.random(360);
-        let distance = p.sqrt(p.random()) * 34;
-
-        let x = p.cos(angle) * distance;
-        let y = p.sin(angle) * distance;
-
-        // check that dots don't overlap!!! 
-        let overlaps = false;
-
-        for (let dot of dotPositions[a]) {
-          if (p.dist(x, y, dot.x, dot.y) < 6) {
-            overlaps = true;
-            break;
-          }
-        }
-
-        if (!overlaps) {
-          dotPositions[a].push({ x: x, y: y });
-        }
-
-      }
-
-    }
-
+    // Find the highest valid value in the data
+    maxValue = d3.max(
+      vals.flat().filter(val => Number.isFinite(val))
+    ) || 1;
 
     p.redraw();
-
   };
-
-
 
 
   p.draw = function () {
@@ -133,134 +94,246 @@ function AgeGroup_FSME(p) {
     p.background(250);
     p.textFont(font);
 
-    // current period
-    p.noStroke();
-    p.textAlign(p.LEFT, p.CENTER);
-    p.textStyle(p.BOLD);
-    p.textSize(13);
-    p.fill(25, 45, 60);
-    p.text((2012 + currentYear) + " – " + (2022 + currentYear), 35, 105);
-
-    p.line(35, 38, p.width - 35, 38);
-
-    // draw all age groups horizontally
+    // Draw all five age groups
     for (let a = 0; a < ages.length; a++) {
       drawCircle(a);
     }
 
+    // Color legend
+    drawLegend();
 
-    // small markers under the slider, one for every year
+    // Explanation of the values
+    //drawUnitNote();
+
+
+    // Small markers under the slider, one for every year
+    // (same as in the Karte: years with a label get a slightly longer marker)
     p.stroke(170, 178, 185);
     p.strokeWeight(1);
 
     for (let i = 0; i < years.length; i++) {
-      let x = 44 + i * (262 / 3);
-      p.line(x, 380, x, 386);
+      let x = 9 + i * (352 / (years.length - 1));
+      let markerLength = i % 2 === 0 ? 6 : 4;
+      p.line(x, 380, x, 380 + markerLength);
     }
 
-    // slider years labels 
+    // Slider labels
     p.noStroke();
+    p.fill(170, 175, 190);
     p.textStyle(p.NORMAL);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
 
     for (let i = 0; i < years.length; i++) {
-      let x = 44 + i * (262 / 3);
+      let x = 9 + i * (352 / (years.length - 1));
 
-      p.fill(100, 110, 118);
-      p.textStyle(p.NORMAL);
-      p.text((2012 + i) + " – " + (2022 + i), x, 398);
-
+      p.text(
+        (2012 + i) + " – " + (2022 + i),
+        p.constrain(x, 30, p.width - 30),
+        393
+      );
     }
+  }
 
-    // legend
-    p.fill(35, 50, 60);
-    p.textSize(10);
-    p.text(
-      "1 Punkt ≈ 1 Fall pro 1 Million Einwohner:innen",
-      p.width / 2,
-      20
-    );
-
-  };
 
 
   function drawCircle(a) {
 
-    // value for this age group
+    // Value for this age group
     let val = vals[currentYear][a];
 
-    // position: 3 circles in the first row, 2 in the second row
+    // Position: three circles in the first row, two in the second row
     let row = a < 3 ? 0 : 1;
     let col = a < 3 ? a : a - 3;
     let circlesInRow = row === 0 ? 3 : 2;
-    let centerX = p.width / 2 + (col - (circlesInRow - 1) / 2) * 99;
-    let centerY = 95 + row * 140;
 
-    // draw background circle
-    p.fill(250);
-    p.stroke(215, 223, 228);
-    p.strokeWeight(1);
-    p.circle(centerX, centerY, 82);
+    // Keep a consistent margin on the left and right
+    let centerX =
+      p.width / 2 +
+      (col - (circlesInRow - 1) / 2) *
+      ((p.width - circleSize) / 2);
 
-    // unavailable values
+    let centerY = 130 + row * 127;
+
+
+    // Unavailable values
     if (!Number.isFinite(val)) {
 
+      // Draw an empty background circle
+      p.fill(250);
+      p.stroke(215, 223, 228);
+      p.strokeWeight(1);
+      p.circle(centerX, centerY, circleSize);
+
       p.noStroke();
-      p.fill(150, 160, 165);
+      p.fill(100, 108, 120);
       p.textAlign(p.CENTER, p.CENTER);
       p.textStyle(p.BOLD);
-      p.textSize(10);
-      p.text("k.A.", centerX, centerY + 72);
+      p.textSize(11);
+      p.text("k.A.", centerX, centerY);
 
       drawAgeGroupLabel(a, centerX, centerY);
 
       return;
     }
 
-    // calculate number of dots
-    let dotAmount = Math.round(val);
 
-    // calculate color based on the ranking of age groups
-    let yearValues = vals[currentYear].filter(val => Number.isFinite(val));
-    let rankedValues = [...new Set(yearValues)].sort((a, b) => a - b);
+    // Display the rounded value without changing the underlying data
+    let displayValue = Math.round(val);
 
-    let colorAmount = rankedValues.length > 1 ? rankedValues.indexOf(val) / (rankedValues.length - 1) : 0;
 
-    let r = p.lerp(brightestBlue[0], darkestBlue[0], colorAmount);
-    let g = p.lerp(brightestBlue[1], darkestBlue[1], colorAmount);
-    let b = p.lerp(brightestBlue[2], darkestBlue[2], colorAmount);
+    // Calculate color based on the ranking of age groups for the selected year
+    let yearValues = vals[currentYear].filter(
+      val => Number.isFinite(val)
+    );
 
-    // draw dots
-    p.noStroke();
+    let rankedValues = [...new Set(yearValues)].sort(
+      (a, b) => a - b
+    );
+
+    let colorAmount =
+      rankedValues.length > 1
+        ? rankedValues.indexOf(val) / (rankedValues.length - 1)
+        : 0;
+
+
+    // Interpolate between the lightest and darkest pink
+    let r = p.lerp(
+      brightestBlue[0],
+      darkestBlue[0],
+      colorAmount
+    );
+
+    let g = p.lerp(
+      brightestBlue[1],
+      darkestBlue[1],
+      colorAmount
+    );
+
+    let b = p.lerp(
+      brightestBlue[2],
+      darkestBlue[2],
+      colorAmount
+    );
+
+
+    // Draw the circle using the color for this age group's value
     p.fill(r, g, b);
+    p.noStroke();
+    p.circle(centerX, centerY, circleSize);
 
-    for (let i = 0; i < dotAmount; i++) {
-      let dot = dotPositions[a][i];
-      p.circle(centerX + dot.x, centerY + dot.y, 5);
+
+    // Choose text color for sufficient contrast
+    if (colorAmount >= 0.65) {
+      p.fill(255);
+    } else {
+      p.fill(79, 18, 53);
     }
 
-    // value
-    p.fill(35, 50, 60);
     p.textAlign(p.CENTER, p.CENTER);
-    p.textStyle(p.NORMAL);
-    p.textSize(10);
-    p.text("≈ " + dotAmount + " Fälle", centerX, centerY + 72);
+    p.textStyle(p.BOLD);
+    p.textSize(23);
 
-    // age group label
+    // Main number inside the circle
+    p.text(displayValue, centerX, centerY - 6);
+
+
+    // label inside the circle
+    p.textSize(10);
+    p.textStyle(p.NORMAL);
+    p.text("Fälle", centerX, centerY + 15);
+
+
+    // Age group label below the circle
     drawAgeGroupLabel(a, centerX, centerY);
   }
 
+
   function drawAgeGroupLabel(a, centerX, centerY) {
-    p.fill(35, 50, 60);
+
+    p.noStroke();
+    p.fill(31, 41, 55);
     p.textAlign(p.CENTER, p.CENTER);
     p.textStyle(p.BOLD);
     p.textSize(10);
-    p.text(ages[a].replace(" - ", " – ") + " J.", centerX, centerY + 55);
+
+    // Position the label a little below the circle
+    p.text(
+      ages[a].replace(" - ", " – ") + " J.",
+      centerX,
+      centerY + circleSize / 2 + 14
+    );
   }
 
-  // Close the AgeGroup_FSME function here
+
+  function drawLegend() {
+
+    // Legend position
+    let margin = 0;
+    let x = margin;
+    let y = 1;
+    let legendWidth = 125;
+
+    p.textSize(10);
+    p.textStyle(p.NORMAL);
+    p.noStroke();
+
+    // Draw five color steps between the lightest and darkest pink
+    let steps = 5;
+    let gap = 1;
+    let blockWidth =
+      (legendWidth - gap * (steps - 1)) / steps;
+
+    for (let i = 0; i < steps; i++) {
+
+      let colorAmount = i / (steps - 1);
+
+      let legendColor = p.lerpColor(
+        p.color(brightestBlue),
+        p.color(darkestBlue),
+        colorAmount
+      );
+
+      p.fill(legendColor);
+
+      p.rect(
+        x + i * (blockWidth + gap),
+        y,
+        blockWidth,
+        6
+      );
+    }
+
+    // Legend labels
+    p.fill(125, 132, 145);
+    p.textAlign(p.LEFT, p.CENTER);
+    p.text("Niedrigste", x, y + 15);
+
+    p.textAlign(p.RIGHT, p.CENTER);
+    p.text("Höchste", x + legendWidth, y + 15);
+
+    p.textAlign(p.LEFT, p.CENTER);
+  }
+
+
+  /*function drawUnitNote() {
+
+    // Explains what the numbers mean
+    p.noStroke();
+    p.fill(100, 108, 120);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.textStyle(p.NORMAL);
+    p.textSize(10);
+
+    p.text(
+      "Fälle pro 1 Million Einwohner:innen · 10-Jahres-Durchschnitt",
+      p.width / 2,
+      345
+    );
+  }*/
+
 }
+
 
 // Start the sketch outside the function
 new p5(AgeGroup_FSME, "c_AgeGroup_FSME");
