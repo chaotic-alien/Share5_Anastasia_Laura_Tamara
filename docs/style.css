@@ -31,6 +31,7 @@ body {
   font-weight: bold;
   color: var(--schriftfarbe-bag);
   margin-bottom: 1rem;
+  margin-top: 1rem;
   line-height: 1.2;
 }
 
@@ -38,15 +39,31 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--schriftfarbe-bag);
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
   line-height: 1.2;
 }
 p {
   font-size: 1rem;
-  margin-top: 0;
-  margin-bottom: 1rem;
+  color: var(--schriftfarbe-bag);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   line-height: 1.6;
+}
+
+.Lauftext-bold {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--schriftfarbe-bag);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.Label {
+  font-size: 0.625rem;
+  color: var(--schriftfarbe-bag);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .Untertitel-row {
@@ -54,29 +71,6 @@ p {
   align-items: center;
   gap: 10px;
   margin-top: 1rem;
-}
-
-.Untertitel-text .Untertitel {
-  margin-top: 0;
-}
-
-.Untertitel-text .Ueberschrift-dünn {
-  margin-bottom: 0.5rem;
-  line-height: 1.2;
-}
-
-.Ueberschrift {
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--schriftfarbe-bag);
-  margin-bottom: 0.5rem;
-}
-
-.Ueberschrift-dünn {
-  font-size: 1rem;
-  font-weight: lighter;
-  color: var(--schriftfarbe-bag);
-  margin-bottom: 0.5rem;
 }
 
 .site-header {
@@ -290,7 +284,8 @@ p {
   justify-content: space-between; /* Abstand zwischen den Elementen */
 
   padding: 10px 16px;
-  margin-bottom: 12px;
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
   cursor: pointer;
   border: 0.5px solid #858585;
   background-color: #ffffff;
@@ -306,27 +301,20 @@ p {
   box-shadow: -4px 4px 15px 0 rgba(0, 0, 0, 0.1); /* Leicht verstärkter Schatten beim Hover */
 }
 
-.Krankheit-FSME {
-  color: schriftfarbe-bag;
-  font-weight: bold;
-}
-
 .Bennenung-Trend-FSME {
   color: var(--farbe-fsme);
-  font-weight: lighter;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
 }
 
 .Trend-Icon-FSME {
   color: var(--farbe-fsme-hell);
-  height: 5vh;
-  width: 5vh;
+  height: 3vh;
+  width: 3vh;
 }
 
 .Meldesystem-FSME {
   color: var(--farbe-fsme);
-  font-weight: lighter;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
   background-color: var(--farbe-fsme-hell);
   border-radius: 10px;
   padding: 5px 10px;
