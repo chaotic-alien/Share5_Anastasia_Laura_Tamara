@@ -50,13 +50,20 @@ function Radial_FSME(p) {
 
   //... dropdown: Position und Zustand ...
   let dropdownOpen = false;
-  let dropdownX = 20;
-  let dropdownY = 20;
+  let dropdownX = 1;
+  let dropdownY = 1;
   let dropdownW = 170;
   let dropdownH = 24;
   let rowH = 20;
 
+  //Reset Button
+  let resetX = cWidth;
+  let resetY = 0;
+
+  // Font
   let font;
+  //optional:
+  //let boldFont;
 
   //------ Setup -------
   //async + await ersetzt die preload function
@@ -79,9 +86,13 @@ function Radial_FSME(p) {
     console.log(maxValue);
 
     //... Schriftart Laden ...
-    font = await p.loadFont("assets/fonts/NotoSans-Black.ttf");
+    font = await p.loadFont("assets/fonts/NotoSans-Regular.ttf");
     p.textFont(font);
+    p.textSize(16);
 
+    //für Bold:
+    // boldFont = await p.loadFont("assets/fonts/NotoSans-Bold.ttf");
+    //nur an den Stellen an denen es bold sein soll -> p.textFont(boldFont);
 
     shape = new Shape(
       x,
@@ -91,12 +102,9 @@ function Radial_FSME(p) {
       lineLength,
       maxValue,
       p,
-      year,
+      year
     );
   };
-
-
-
 
   // -------- Draw ---------
   p.draw = function () {
@@ -109,7 +117,7 @@ function Radial_FSME(p) {
 
     //Shape zeichnen
     p.push();
-    p.translate(cWidth/2, cHeigth/2);
+    p.translate(cWidth / 2, cHeigth / 2);
     p.rotate(+step / 2);
     //shape.display(this);
     drawSelectedYears();
@@ -128,20 +136,15 @@ function Radial_FSME(p) {
     p.noLoop();
   };
 
-
-
-
-
   // ------ Basis des Diagramms (Kreise und Striche) -------
   function drawBase() {
-
     p.push();
-    p.translate(cWidth/2, cHeigth/2);
+    p.translate(cWidth / 2, cHeigth / 2);
     p.rotate(+step / 2);
 
     // Kreise attribute
     p.noFill();
-    p.stroke(211,221,235, 100);
+    p.stroke(211, 221, 235, 100);
     p.strokeWeight(1);
     p.textStyle(p.NORMAL);
     p.textSize(10);
@@ -159,28 +162,29 @@ function Radial_FSME(p) {
 
       // Beschriftung der Kreise
       p.noStroke();
-      p.fill(31,41,55);
+      p.fill(31, 41, 55);
       p.textAlign(p.CENTER, p.CENTER);
       p.text(abstand, 0, -radius - 5);
 
       p.noFill();
-      p.stroke(170,175,190,100);
+      p.stroke(170, 175, 190, 100);
     }
 
     //Beschriftung des maximalen Wertes
     p.noStroke();
-    p.fill(31,41,55);
-    p.text(maxValue, 0, -lineLength -5);
+    p.textSize(10);
+    p.fill(157, 23, 77);
+    p.text(maxValue, 0, -lineLength - 8);
 
     p.rotate(step / 2);
 
     //Striche & Monate Beschriftung
-    p.fill(31,41,55);
-    p.textSize(11);
+    p.fill(31, 41, 55);
+    p.textSize(16);
 
     for (let i = 0; i < numLines; i++) {
       p.noStroke();
-      p.text(month[i], 0, -lineLength -10); // Draw month label above the line
+      p.text(month[i], 0, -lineLength - 10); // Draw month label above the line
 
       p.stroke(0);
       p.line(0, -lineLength, 0, 0); // Draw line from the center outward
@@ -190,7 +194,7 @@ function Radial_FSME(p) {
 
     //äusserster Kreis
     p.noFill();
-    p.stroke(31,41,55);
+    p.stroke(31, 41, 55);
     p.strokeWeight(1);
     p.ellipse(0, 0, lineLength * 2);
 
@@ -234,7 +238,7 @@ function Radial_FSME(p) {
   //Draw Filter (dropdown)
   function drawYearFilter() {
     p.textStyle(p.NORMAL);
-    p.textSize(11);
+    p.textSize(16);
     p.textAlign(p.LEFT, p.CENTER);
 
     // text in the closed dropdown
@@ -246,17 +250,17 @@ function Radial_FSME(p) {
     }
 
     // dropdown header
-    p.fill(250);
-    p.stroke(220, 225, 228);
+    p.fill(255);
+    p.stroke(170,175,190,100);
     p.strokeWeight(1);
     p.rect(dropdownX, dropdownY, dropdownW, dropdownH, 3);
 
     p.noStroke();
-    p.fill(25, 45, 60);
+    p.fill(31,41,55);
     p.text(label, dropdownX + 10, dropdownY + dropdownH / 2);
 
     // small arrow on the right
-    p.fill(10, 60, 110);
+    p.fill(31,41,55);
     let arrowX = dropdownX + dropdownW - 16;
     let arrowY = dropdownY + dropdownH / 2;
     if (dropdownOpen) {
@@ -280,58 +284,69 @@ function Radial_FSME(p) {
     }
 
     // list of years, only when open
+    
+    // Liste der Jahre, nur wenn Dropdown geöffnet ist
     if (dropdownOpen) {
       let listY = dropdownY + dropdownH + 2;
 
-      p.fill(255);
-      p.stroke(220, 225, 228);
+      p.fill(255,255,255,200);
+      p.stroke(170,175,190,100);
       p.strokeWeight(1);
       p.rect(dropdownX, listY, dropdownW, 13 * rowH + 10, 3);
 
       for (let i = 0; i < 13; i++) {
         let rowY = listY + 5 + i * rowH;
-        let isSelected = selectedYears.includes(i + 1);
 
-        // checkbox
+        // Neueste Jahre zuerst: 2025, 2024, ... 2013
+        let yearIndex = 13 - i;
+        let year = 2012 + yearIndex;
+        let isSelected = selectedYears.includes(yearIndex);
+
+        // Checkbox
         if (isSelected) {
           p.noStroke();
-          p.fill(10, 60, 110);
+          p.fill(157, 23, 77);
         } else {
-          p.stroke(220, 225, 228);
+          p.stroke(170,175,190,100);
           p.fill(255);
         }
         p.rect(dropdownX + 10, rowY + 4, 12, 12, 3);
 
-        // year
+        // Jahr anzeigen
         p.noStroke();
-        p.fill(25, 45, 60);
-        p.text(2013 + i, dropdownX + 32, rowY + rowH / 2);
+        p.fill(31,41,55);
+        p.text(year, dropdownX + 32, rowY + rowH / 2);
       }
     }
 
+
     // Clear all Button
     p.rectMode(p.RADIUS);
-    p.fill(250);
-    p.stroke(220, 225, 228);
+    p.fill(255);
+    p.stroke(170,175,190,100);
     p.strokeWeight(1);
-    p.rect(cWidth -70, 32, 50, 13, 3);
-    
-  
+    p.rect(cWidth-56, 14, 55, 13, 3);
 
     p.noStroke();
     if (selectedYears.length > 0) {
-      p.fill(25, 45, 60);
+      p.fill(157, 23, 77);
     } else {
-      p.fill(100, 110, 118);
+      p.fill(31,41,55);
     }
-    p.text("Filter löschen", cWidth -100, 32);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text("Filter löschen", cWidth - 55, 14);
     p.rectMode(p.CORNER);
   }
 
   //Jahr-Filter: Klicks
   p.mousePressed = function () {
     // Filter löschen
-    if (p.mouseX > cWidth -120 && p.mouseX < cWidth - 20 && p.mouseY > 20 && p.mouseY < 40) {
+    if (
+      p.mouseX > cWidth - 56 - 55 && // Start-X (Mitte - Breite)
+  p.mouseX < cWidth - 56 + 55 && // Ende-X (Mitte + Breite)
+  p.mouseY > 14 - 13 &&          // Start-Y (Mitte - Höhe)
+  p.mouseY < 14 + 13
+    ) {
       selectedYears = [];
       p.redraw();
       return;
@@ -361,11 +376,14 @@ function Radial_FSME(p) {
       ) {
         let i = Math.floor((p.mouseY - (listY + 5)) / rowH);
 
-        if (selectedYears.includes(i + 1)) {
-          selectedYears = selectedYears.filter((year) => year !== i + 1);
-        } else {
-          selectedYears.push(i + 1);
-        }
+// Index passend zur umgekehrten Reihenfolge
+let yearIndex = 13 - i;
+
+if (selectedYears.includes(yearIndex)) {
+  selectedYears = selectedYears.filter((year) => year !== yearIndex);
+} else {
+  selectedYears.push(yearIndex);
+}
       } else {
         // Klick ausserhalb schliesst die Liste
         dropdownOpen = false;
@@ -374,11 +392,6 @@ function Radial_FSME(p) {
       p.redraw();
     }
   };
-
-
-
-
-
 
   //------- Klasse für Form --------
   class Shape {
@@ -432,12 +445,11 @@ function Radial_FSME(p) {
       p.fill(
         //beim lerp immer von oben nach unten die Farben
         //(lerp(hellsteFarbe, dunkelsteFarbe, this.c / 255))
-        p.lerp(249,131, this.c / 255),
-        p.lerp(168,24, this.c / 255),
-        p.lerp(212,67, this.c / 255),
+        p.lerp(249, 131, this.c / 255),
+        p.lerp(168, 24, this.c / 255),
+        p.lerp(212, 67, this.c / 255),
         170
       );
-
 
       //p.noStroke();
       p.stroke(131, 24, 67);
@@ -461,10 +473,6 @@ function Radial_FSME(p) {
       }
     }
   }
-
-
-
-
 
   //----- ab hier nicht anfassen! ---------
   //Grrr
