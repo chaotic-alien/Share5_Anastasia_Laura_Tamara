@@ -311,7 +311,7 @@ p {
 }
 
 .ButtonsK:hover {
-  background-color: #f0f0f0; /* Hellerer Hintergrund beim Hover */
+  background-color: #1c293809;
   box-shadow: -4px 4px 15px 0 rgba(0, 0, 0, 0.1); /* Leicht verstärkter Schatten beim Hover */
 }
 
@@ -438,7 +438,8 @@ a {
 .KrankheitLink svg {
   width: 4vw;
   height: 3vh;
-  color: var(--schriftfarbe-bag-link); /* Standardfarbe für das SVG */
+  color: inherit;
+  fill: currentColor;
 }
 
 .Trennlinie {
@@ -471,6 +472,8 @@ a {
   z-index: 10;
   background-color: #ffffff;
   color: var(--schriftfarbe-bag);
+  font-weight: bold;
+  font-size: 1rem;
   box-shadow: 0px 8px 10px -5px rgba(188, 185, 185, 0.3);
   padding: 10px 24px;
   margin-left: -1rem;
@@ -519,7 +522,8 @@ a {
 }
 
 .Link {
-  color: var(--schriftfarbe-bag-link);
+  color: var(--farbe-fsme);
+  font-size: 0.625rem;
   text-decoration: underline;
   transition: color 0.3s ease;
 }
@@ -531,37 +535,48 @@ a {
 .info-box {
   display: flex; /* Bringt Bild und Text nebeneinander */
   align-items: center; /* Zentriert Bild und Text vertikal */
-  gap: 20px; /* Abstand zwischen Bild und Text */
-  font-family: Arial, sans-serif;
+  gap: 50px; /* Abstand zwischen Bild und Text */
+  font-family:
+    Noto Sans,
+    sans-serif;
   max-width: 500px; /* Maximale Breite der Box */
-  padding-top: 20px;
+  padding: 10px; /* Innenabstand */
+  color: var(--farbe-fsme);
+  border: 0.1px solid transparent;
+  border-radius: 10px; /* Abgerundete Ecken */
+  box-shadow: -4px 4px 10px 0 color-mix(in srgb, currentColor 5%, transparent);
+}
+
+.info-box + .info-box {
+  margin-top: 0.5rem;
 }
 
 /* Bild-Bereich links */
 .info-box-image svg {
-  width: 30px; /* Anpassen nach Bedarf */
+  width: 50px; /* Anpassen nach Bedarf */
   height: 30px;
   color: var(--farbe-fsme); /* Farbe für das SVG */
   fill: currentColor;
   align-self: flex-start; /* Bild oben ausrichten */
   object-fit: cover;
   border-radius: 4px; /* Leichte Abrundung der Ecken */
-  padding: 10px; /* Innenabstand für das Bild */
 
   display: block;
+  transform: scale(2);
+  transform-origin: left center;
 }
 
 .info-box-image.bg-color-fsme {
-  background-color: var(--farbe-fsme-hell); /* Pink */
+  background-color: white; /* Weiß */
   border-radius: 4px;
 }
 
 .info-box-image.bg-color-tularaemie {
-  background-color: var(--farbe-tularaemie); /* Lila */
+  background-color: white; /* Weiß */
   border-radius: 4px;
 }
 .info-box-image.bg-color-borreliose {
-  background-color: var(--farbe-borreliose); /* Rosa */
+  background-color: white; /* Weiß */
   border-radius: 4px;
 }
 
@@ -569,28 +584,15 @@ a {
 .info-box-content {
   display: flex;
   flex-direction: column; /* Ordnet die 3 Textzeilen untereinander an */
-  gap: 4px; /* Abstand zwischen den Textzeilen */
+  gap: 0;
+  line-height: 1.2;
 }
 
-/* Zeile 1: Kategoriestext (grau & klein) */
-.info-box-content .category {
-  font-size: 14px;
-  color: #999999;
-}
-
-/* Zeile 2: Titel (fett & dunkel) */
-.info-box-content .title {
-  margin: 0; /* Standart-Abstände des h3 entfernen */
-  font-size: 20px;
-  font-weight: bold;
-  color: #1a2b3c;
-}
-
-/* Zeile 3: Beschreibungstext */
-.info-box-content .description {
-  margin: 0; /* Standart-Abstände des p entfernen */
-  font-size: 14px;
-  color: #333333;
+.info-box-content > span,
+.info-box-content > .Lauftext-bold,
+.info-box-content > .Label,
+.info-box-content > p {
+  margin: 0.25rem;
 }
 
 #c_Radial_FSME {
