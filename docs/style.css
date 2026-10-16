@@ -597,19 +597,19 @@ a {
 }
 
 #c_Radial_FSME {
-  /*border: 1px solid magenta;*/
+  border: 1px solid magenta;
   width: 350px;
   height: 400px;
 }
 
 #c_Karte_FSME {
-  /*border: 1px solid magenta;*/
+  border: 1px solid magenta;
   width: 350px;
   height: 680px;
 }
 
 #c_AgeGroup_FSME {
-  /*border: 1px solid magenta;*/
+  border: 1px solid magenta;
   width: 350px;
   height: 420px;
 }
