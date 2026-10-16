@@ -5,6 +5,11 @@ function AgeGroup_FSME(p) {
 
 
   let data;
+
+  // Font
+  let font;
+
+
   // labels
   let ages = ["0 - 16", "17 - 44", "45 - 64", "65 - 84", "85+"];
 
@@ -29,17 +34,22 @@ function AgeGroup_FSME(p) {
   // async + await ersetzt die preload function
   p.setup = async function () {
 
-    
+
 
     // wait until csv completely loaded
     data = await d3.csv("assets/FSME_oblig/data.csv");
+
+
+    font = await p.loadFont("assets/fonts/NotoSans-Regular.ttf");
+    p.textFont(font);
+    p.textSize(16);
 
 
     let canvas = p.createCanvas(350, 420);
     canvas.parent("c_AgeGroup_FSME");
     p.noLoop();
     p.angleMode(p.DEGREES);
-   
+
 
     // create year slider – Asked Co-Pilot to create it
     yearSlider = p.createSlider(0, 3, currentYear, 1);
@@ -121,6 +131,7 @@ function AgeGroup_FSME(p) {
   p.draw = function () {
 
     p.background(250);
+    p.textFont(font);
 
     // current period
     p.noStroke();

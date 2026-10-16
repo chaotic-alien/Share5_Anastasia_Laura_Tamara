@@ -2,6 +2,11 @@ function Karte_FSME(p) {
   let data;
   let mapData;
 
+
+  // fonts
+  let font;
+
+
   // labels
   let years = Array.from({ length: 13 }, (_, i) => String(2013 + i));
 
@@ -35,8 +40,8 @@ function Karte_FSME(p) {
   ];
 
   // colors - change these values to change the map colors
-  let brightest = [249, 168, 212];
-  let darkest = [131, 24, 67];
+  let brightest = [251, 207, 232];
+  let darkest = [157, 23, 77];
 
   // color of the lines between cantons
   let cantonBorderCol = [220, 220, 220];
@@ -65,7 +70,8 @@ function Karte_FSME(p) {
 
   // async + await ersetzt die preload function
   p.setup = async function () {
-    let canvas = p.createCanvas(350, 680);
+    let canvas = p.createCanvas(370, 680);
+
 
     let yearSlider = p.createSlider(0, 12, currentYear, 1);
     yearSlider.parent("c_Karte_FSME");
@@ -81,6 +87,12 @@ function Karte_FSME(p) {
 
     // load the geojson
     mapData = await p.loadJSON("assets/data_Karte/canton.geojson");
+
+
+    // Font laden
+    font = await p.loadFont("assets/fonts/NotoSans-Regular.ttf");
+    p.textFont(font);
+    p.textSize(16);
 
 
 
@@ -116,6 +128,9 @@ function Karte_FSME(p) {
   p.draw = function () {
     p.background(250);
 
+    // set the default font for the sketch
+    p.textFont(font);
+
     //calculate the highest incidence for the selected year
     // used as the maximum for the map colors and ranking bars
     maxIncidence = d3.max(cantons, (canton) => incidences[currentYear][canton] || 0) || 1;
@@ -140,10 +155,10 @@ function Karte_FSME(p) {
 
   function drawMap() {
     // map size and position
-    let mapLeft = 35;
-    let mapRight = p.width - 35;
-    let mapTop = 160;
-    let mapBottom = 355;
+    let mapLeft = 0;
+    let mapRight = p.width;
+    let mapTop = 140;
+    let mapBottom = 376;
 
     // loop through every canton in the geojson
     for (let feature of mapData.features) {
@@ -210,30 +225,30 @@ function Karte_FSME(p) {
 
 
 
-    function drawYearLabels() {
+  function drawYearLabels() {
     // small markers under the slider, one for every year
     // years with a label get a slightly longer marker
     p.stroke(170, 178, 185);
     p.strokeWeight(1);
 
     for (let i = 0; i < years.length; i++) {
-      let x = 44 + i * (262 / (years.length - 1));
+      let x = 9 + i * (352 / (years.length - 1));
       let markerLength = i % 2 === 0 ? 6 : 4;
       p.line(x, 408, x, 408 + markerLength);
     }
 
     p.noStroke();
-    p.fill(100, 110, 118);
+    p.fill(170, 175, 190);
     p.textStyle(p.NORMAL);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
 
     for (let i = 0; i < years.length; i += 2) {
-      let x = 44 + i * (262 / (years.length - 1));
-      p.text(years[i], x, 421);
+      let x = 9 + i * (352 / (years.length - 1));
+      p.text(years[i], p.constrain(x, 12, p.width - 12), 421);
     }
   }
-  
+
 
 
 
@@ -250,29 +265,28 @@ function Karte_FSME(p) {
   function drawSelectedCanton() {
     // show a hint card so it's clear that cantons can be clicked
     if (selectedCanton === null) {
-      let hintX = p.width - 35 - 280;
+      let hintX = 0;
       let hintY = 20;
 
       p.fill(255);
       p.stroke(220, 225, 228);
       p.strokeWeight(1);
-      p.rect(hintX, hintY, 280, 82, 3);
+      p.rect(hintX, hintY, p.width, 76, 3);
 
       p.fill(220);
       p.noStroke();
-      p.rect(hintX, hintY, 4, 82, 3, 0, 0, 3);
+      p.rect(hintX, hintY, 4, 76, 3, 0, 0, 3);
 
-      p.fill(25, 45, 60);
+      p.fill(31, 41, 55);
       p.textAlign(p.LEFT, p.BASELINE);
       p.textStyle(p.BOLD);
-      p.textSize(13);
-      p.text("Kanton auswählen", hintX + 16, hintY + 24);
+      p.textSize(16);
+      p.text("Kanton auswählen", hintX + 16, hintY + 30);
 
-      p.fill(100, 110, 118);
+      p.fill(170, 175, 190);
       p.textStyle(p.NORMAL);
-      p.textSize(11);
-      p.text("Klicke auf einen Kanton in der Karte,", hintX + 16, hintY + 48);
-      p.text("um die Werte anzuzeigen.", hintX + 16, hintY + 64);
+      p.textSize(10);
+      p.text("Klicke auf einen Kanton.", hintX + 16, hintY + 54);
 
       p.textAlign(p.LEFT, p.CENTER);
       return;
@@ -284,9 +298,9 @@ function Karte_FSME(p) {
     let population = populations[currentYear][selectedCanton] || 0;
 
     // popup position and size
-    let margin = 35;
-    let bubbleWidth = 280;
-    let bubbleHeight = 82;
+    let margin = 0;
+    let bubbleWidth = p.width;
+    let bubbleHeight = 76;
 
     // popup position
     let x = p.width - margin - bubbleWidth;
@@ -315,55 +329,58 @@ function Karte_FSME(p) {
     p.rect(x, y, 4, bubbleHeight, 3, 0, 0, 3);
 
     // canton name in pop up
-    p.fill(25, 45, 60);
+    p.fill(31, 41, 55);
     p.textAlign(p.LEFT, p.BASELINE);
     p.textStyle(p.BOLD);
-    p.textSize(13);
+    p.textSize(16);
 
     p.text(
       getCantonName(selectedCanton) + " · " + selectedCanton,
       x + 16,
-      y + 24,
+      y + 20,
     );
 
     // incidence value in popup
     let incidenceText = incidenceValue.toFixed(1);
 
     p.fill(157, 23, 77);
-    p.textSize(22);
-    p.text(incidenceText, x + 16, y + 54);
+    p.textStyle(p.BOLD);
+    p.textSize(24);
+    p.text(incidenceText, x + 16, y + 46);
 
+    p.textSize(24);
     let numberWidth = p.textWidth(incidenceText);
 
     p.fill(157, 23, 77);
     p.textStyle(p.BOLD);
-    p.textSize(11);
-    p.text("Fälle pro 100 000", x + 16 + numberWidth + 6, y + 54);
+    p.textSize(16);
+    p.text("Fälle pro 100 000", x + 16 + numberWidth + 6, y + 46);
 
     // cases and population in pop up rounded so it's easier for laien
     let casesText = Math.round(cantonCases) + " Fälle";
 
-    p.fill(100, 110, 118);
+    p.fill(170, 175, 190);
     p.textStyle(p.NORMAL);
     p.textSize(10);
-    p.text(casesText, x + 16, y + 72);
+    p.text(casesText, x + 16, y + 65);
 
+    p.textSize(10);
     let casesWidth = p.textWidth(casesText);
 
-    p.fill(100, 110, 118);
+    p.fill(170, 175, 190);
     p.textStyle(p.NORMAL);
     p.text(
       " bei " +
       Math.round(population).toLocaleString("de-CH") +
       " Einwohner:innen",
       x + 16 + casesWidth,
-      y + 72,
+      y + 65,
     );
 
     //back to default 
     p.textAlign(p.LEFT, p.CENTER);
   }
-  
+
 
 
 
@@ -376,17 +393,17 @@ function Karte_FSME(p) {
 
   function drawLegend() {
     // legend position
-    let margin = 35;
+    let margin = 0;
     let x = margin;
-    let y = 118;
-    let legendWidth = 100;
+    let y = 110;
+    let legendWidth = 125;
 
-    p.textSize(9);
+    p.textSize(10);
     p.textStyle(p.NORMAL);
     p.fill(80);
     p.noStroke();
 
-        // color steps
+    // color steps
     // draw 5 separate blocks, each with one color between the brightest and darkest color
     let steps = 5;
     let gap = 1;
@@ -406,7 +423,7 @@ function Karte_FSME(p) {
     }
 
     // legend labels
-    p.fill(100, 110, 118);
+    p.fill(170, 175, 190);
     p.textAlign(p.LEFT);
     p.text("Niedrigste", x, y + 15);
 
@@ -450,44 +467,50 @@ function Karte_FSME(p) {
     ranking = ranking.slice(0, 5);
 
     // ranking position
-    let x = 35;
+    let x = 0;
     let y = 440;
 
     // subtitle
     p.noStroke();
     p.textAlign(p.LEFT);
-    p.textStyle(p.NORMAL);
+    p.textStyle(p.BOLD);
     p.textSize(10);
-    p.fill(100, 110, 118);
+    p.fill(31, 41, 55);
     p.text("Top 5 Kantone", x, y + 20);
+    p.textAlign(p.RIGHT);
+    p.text("Fälle", p.width, y + 20);
+    p.textAlign(p.LEFT);
 
     // ranking bars
     for (let i = 0; i < ranking.length; i++) {
       let rankingItem = ranking[i];
 
-      let barY = y + 40 + i * 40;
+      let barY = y + 40 + i * 38;
 
       // canton name
-      p.fill(25, 45, 60);
-      p.textSize(11);
+      p.fill(31, 41, 55);
+      p.textStyle(p.BOLD);
+      p.textSize(10);
 
       p.text(rankingItem.canton, x, barY + 12);
 
       // background bar for reference
       p.fill(220, 229, 233);
-      p.rect(x + 35, barY, 190, 18, 3);
+      p.rect(x + 35, barY, 300, 20, 3);
 
       // incidence bar - value
-      p.fill(190, 24, 93);
+      p.fill(157, 23, 77);
 
-      let barWidth = p.map(rankingItem.incidence, 0, maxIncidence, 0, 190);
+      let barWidth = p.map(rankingItem.incidence, 0, maxIncidence, 0, 300);
 
-      p.rect(x + 35, barY, barWidth, 18, 3);
+      p.rect(x + 35, barY, barWidth, 20, 3);
 
       // value at the end
-      p.fill(25, 45, 60);
+      p.fill(31, 41, 55);
       p.textAlign(p.RIGHT);
-      p.text(rankingItem.incidence.toFixed(1), x + 270, barY + 8);
+      p.textStyle(p.BOLD);
+      p.textSize(10);
+      p.text(rankingItem.incidence.toFixed(1), p.width, barY + 10);
       p.textAlign(p.LEFT);
     }
   }
@@ -508,7 +531,7 @@ function Karte_FSME(p) {
   p.mousePressed = function () {
 
     // ignore clicks in the year slider area
-    if (p.mouseY < 160 || p.mouseY > 355) {
+    if (p.mouseY < 140 || p.mouseY > 376) {
       return;
     }
 
@@ -556,13 +579,13 @@ function Karte_FSME(p) {
         // check if the mouse position is inside the polygon check all border points of polygon
         for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
           // convert geo coordinates into canvas coordinates
-          let pointX = p.map(points[i][0], 5.8, 10.6, 35, p.width - 35);
+          let pointX = p.map(points[i][0], 5.8, 10.6, 0, p.width);
 
-          let pointY = p.map(points[i][1], 45.8, 47.9, 355, 160);
+          let pointY = p.map(points[i][1], 45.8, 47.9, 376, 140);
 
-          let previousX = p.map(points[j][0], 5.8, 10.6, 35, p.width - 35);
+          let previousX = p.map(points[j][0], 5.8, 10.6, 0, p.width);
 
-          let previousY = p.map(points[j][1], 45.8, 47.9, 355, 160);
+          let previousY = p.map(points[j][1], 45.8, 47.9, 376, 140);
 
           // check whether the mouse crossed the polygon boundary
           if (
@@ -591,7 +614,7 @@ function Karte_FSME(p) {
 
 
 
-// convert string to number and return 0 if not a number
+  // convert string to number and return 0 if not a number
   function toNumber(value) {
     let number = Number(value);
     return Number.isFinite(number) ? number : 0;

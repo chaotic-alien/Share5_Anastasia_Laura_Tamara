@@ -652,9 +652,9 @@ a {
 /* position and style the slider */
 #c_AgeGroup_FSME input[type="range"] {
   position: absolute;
-  left: 35px;
+  left: 0px;
   top: 365px;
-  width: 280px;
+  width: 370px;
   height: 5px;
   margin: 0;
 
@@ -694,9 +694,9 @@ a {
 /* position and style the slider */
 #c_Karte_FSME input[type="range"] {
   position: absolute;
-  left: 35px;
+  left: 0px;
   top: 395px;
-  width: 280px;
+  width: 370px;
   height: 5px;
   margin: 0;
   z-index: 0;
@@ -715,7 +715,7 @@ a {
   -webkit-appearance: none;
   width: 18px;
   height: 18px;
-  background: #be185d;
+  background: #9d174d;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -723,7 +723,7 @@ a {
 #c_Karte_FSME input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
-  background: #0a3c6e;
+  background: #9d174d;
   border: none;
   border-radius: 50%;
   cursor: pointer;
