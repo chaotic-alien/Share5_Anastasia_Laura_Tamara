@@ -100,13 +100,8 @@
           type="button"
           data-audio-target="audioZeitlicheEntwicklung"
         >
-          <img src="SVG/zecke.svg" alt="Zecken Icon" width="50" height="50" />
+          <img src="SVG/Lupe.svg" alt="Lupe Icon" width="30" height="30" />
         </button>
-        <audio
-          id="audioZeitlicheEntwicklung"
-          src="Audio/FSME-Zeitliche_Entwicklung.mp3"
-          preload="auto"
-        ></audio>
       </div>
 
       <div id="c_Radial_FSME" class="canvas-full-width"></div>
@@ -123,13 +118,8 @@
           type="button"
           data-audio-target="audioKantone"
         >
-          <img src="SVG/zecke.svg" alt="Zecken Icon" width="50" height="50" />
+          <img src="SVG/Lupe.svg" alt="Lupe Icon" width="30" height="30" />
         </button>
-        <audio
-          id="audioKantone"
-          src="Audio/FSME-Verteilung_nach_Kantone.mp3"
-          preload="auto"
-        ></audio>
       </div>
 
       <div id="c_Karte_FSME" class="canvas-full-width"></div>
@@ -149,25 +139,8 @@
           type="button"
           data-audio-target="audioAltersklassen"
         >
-          <img src="SVG/zecke.svg" alt="Zecken Icon" width="50" height="50" />
+          <img src="SVG/Lupe.svg" alt="Lupe Icon" width="30" height="30" />
         </button>
-        <audio
-          id="audioAltersklassen"
-          src="Audio/FSME-Verteilung_nach_Alter.mp3"
-          preload="auto"
-        ></audio>
-
-        <script>
-          document.querySelectorAll(".Zeckenbutton").forEach((button) => {
-            button.addEventListener("click", () => {
-              const audio = document.getElementById(button.dataset.audioTarget);
-              audio.currentTime = 0;
-              audio.play().catch((error) => {
-                console.error("Audio konnte nicht abgespielt werden:", error);
-              });
-            });
-          });
-        </script>
       </div>
 
       <div id="c_AgeGroup_FSME" class="canvas-full-width"></div>
