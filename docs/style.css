@@ -9,6 +9,10 @@
   --farbe-borreliose-hell: #fcd34d;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: noto-sans, sans-serif;
   margin: 0rem;
@@ -37,6 +41,12 @@ body {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   line-height: 1.2;
+}
+p {
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.6;
 }
 
 .Untertitel-row {
@@ -211,6 +221,33 @@ body {
 
 .menu-button:hover {
   opacity: 0.7;
+}
+
+.menu-button i {
+  display: block;
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background-color: currentColor;
+  font-size: 0;
+}
+
+.menu-button i::before,
+.menu-button i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background-color: currentColor;
+}
+
+.menu-button i::before {
+  top: -7px;
+}
+
+.menu-button i::after {
+  top: 7px;
 }
 
 /* Responsive Anpassung für kleinere Bildschirme */
@@ -407,6 +444,7 @@ a {
   height: 24px;
   color: var(--schriftfarbe-bag-link); /* Standardfarbe für das SVG */
 }
+
 .Trennlinie {
   border-top: 1px solid #ccc;
   margin: 20px 0;
@@ -485,8 +523,12 @@ a {
 
 .Link {
   color: var(--schriftfarbe-bag-link);
-  text-decoration: none;
+  text-decoration: underline;
   transition: color 0.3s ease;
+}
+
+.Link:hover {
+  transform: scale(1.05); /* Vergrößert den Link leicht beim Hover */
 }
 /* Container-Kiste */
 .info-box {
@@ -577,6 +619,36 @@ a {
   width: calc(100% + 2rem);
   margin-left: -1rem;
   margin-right: -1rem;
+}
+
+/* Keep every content section inside the page margins on small screens. */
+@media (max-width: 600px) {
+  .top-bar {
+    margin-inline: 0;
+  }
+
+  .main-bar {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .navigation-top {
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  .canvas-full-width {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  #c_Radial_FSME,
+  #c_Karte_FSME,
+  #c_AgeGroup_FSME {
+    width: 100%;
+    max-width: 350px;
+  }
 }
 
 .canvas-full-width canvas {
@@ -691,8 +763,4 @@ a {
 .Zeckenbutton svg {
   width: 130px;
   height: 130px;
-}
-
-canvas {
-  touch-action: pan-y; /* Erlaubt vertikales Scrollen auf dem Canvas */
 }
