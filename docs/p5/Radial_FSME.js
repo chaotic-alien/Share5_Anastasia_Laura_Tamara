@@ -56,8 +56,11 @@ function Radial_FSME(p) {
   let dropdownH = 24;
   let rowH = 20;
 
+  let font;
+
   //------ Setup -------
   //async + await ersetzt die preload function
+  //... Daten Laden ...
   p.setup = async function () {
     p.createCanvas(cWidth, cHeigth);
     p.angleMode(p.DEGREES);
@@ -74,6 +77,11 @@ function Radial_FSME(p) {
     //höchstes Value im Datensatz finden
     maxValue = d3.max(filteredData, (d) => +d.value);
     console.log(maxValue);
+
+    //... Schriftart Laden ...
+    font = await p.loadFont("assets/fonts/NotoSans-Black.ttf");
+    p.textFont(font);
+
 
     shape = new Shape(
       x,
