@@ -108,7 +108,7 @@ function Radial_FSME(p) {
 
   // -------- Draw ---------
   p.draw = function () {
-    p.background(250);
+    p.background(255);
 
     //... Diagramm ...
     // diagram moves down to make room for the header

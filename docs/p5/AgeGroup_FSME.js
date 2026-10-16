@@ -91,7 +91,7 @@ function AgeGroup_FSME(p) {
 
   p.draw = function () {
 
-    p.background(250);
+    p.background(255);
     p.textFont(font);
 
     // Draw all five age groups

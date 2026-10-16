@@ -129,7 +129,7 @@ function Karte_FSME(p) {
 
 
   p.draw = function () {
-    p.background(250);
+    p.background(255);
 
     // set the default font for the sketch
     p.textFont(font);
