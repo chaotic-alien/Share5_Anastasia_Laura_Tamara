@@ -326,7 +326,7 @@ p {
 
 .Bennenung-Trend-FSME {
   color: var(--farbe-fsme);
-  font-size: 0.625rem;
+  font-size: 1rem;
 }
 
 .Trend-Icon-FSME {
@@ -338,7 +338,7 @@ p {
 
 .Meldesystem-FSME {
   color: var(--farbe-fsme);
-  font-size: 0.625rem;
+  font-size: 1rem;
   background-color: var(--farbe-fsme-hell);
   border-radius: 10px;
   padding: 5px 10px;
@@ -353,7 +353,7 @@ p {
 
 .Bennenung-Trend-Tularaemie {
   color: var(--farbe-tularaemie);
-  font-size: 0.625rem;
+  font-size: 1rem;
 }
 
 .Trend-Icon-Tularaemie {
@@ -365,7 +365,7 @@ p {
 
 .Meldesystem-Tularaemie {
   color: var(--farbe-tularaemie);
-  font-size: 0.625rem;
+  font-size: 1rem;
   background-color: var(--farbe-tularaemie-hell);
   border-radius: 10px;
   padding: 5px 10px;
@@ -380,7 +380,7 @@ p {
 
 .Bennenung-Trend-Borreliose {
   color: var(--farbe-borreliose);
-  font-size: 0.625rem;
+  font-size: 1rem;
 }
 
 .Trend-Icon-Borreliose {
@@ -398,7 +398,7 @@ p {
 
 .Meldesystem-Borreliose {
   color: var(--farbe-borreliose);
-  font-size: 0.625rem;
+  font-size: 1rem;
   background-color: var(--farbe-borreliose-hell);
   border-radius: 10px;
   padding: 5px 10px;
