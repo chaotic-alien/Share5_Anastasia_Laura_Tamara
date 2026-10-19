@@ -337,6 +337,9 @@ p {
 }
 
 .Meldesystem-FSME {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--farbe-fsme);
   font-size: 1rem;
   background-color: var(--farbe-fsme-hell);
@@ -364,6 +367,9 @@ p {
 }
 
 .Meldesystem-Tularaemie {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--farbe-tularaemie);
   font-size: 1rem;
   background-color: var(--farbe-tularaemie-hell);
@@ -397,6 +403,9 @@ p {
 }
 
 .Meldesystem-Borreliose {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--farbe-borreliose);
   font-size: 1rem;
   background-color: var(--farbe-borreliose-hell);
@@ -409,6 +418,22 @@ p {
 
 .Meldesystem-Borreliose:hover {
   transform: scale(1.05); /* Vergrößert den Button leicht beim Hover */
+}
+
+.Pfeil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+}
+
+.Meldesystem-FSME .Pfeil svg,
+.Meldesystem-Tularaemie .Pfeil svg,
+.Meldesystem-Borreliose .Pfeil svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
 }
 
 .content {
@@ -809,5 +834,5 @@ a {
   height: 30px;
   color: var(--farbe-fsme);
   fill: currentColor;
-  animation: elastic-bounce 60s ease infinite;
+  animation: elastic-bounce 30s ease 3s infinite;
 }
