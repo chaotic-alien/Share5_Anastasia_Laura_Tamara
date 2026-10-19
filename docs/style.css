@@ -532,7 +532,7 @@ a {
 
 .Link {
   color: var(--farbe-fsme);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   text-decoration: underline;
   transition: color 0.3s ease;
 }
