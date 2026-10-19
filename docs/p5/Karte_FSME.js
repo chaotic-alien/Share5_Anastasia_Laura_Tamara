@@ -46,9 +46,9 @@ function Karte_FSME(p) {
   // color of the lines between cantons
   let cantonBorderCol = [220, 220, 220];
 
-  // highest incidence in the selected year
-  // used as the maximum for the color scale
-  let maxIncidence = 0;
+  // highest incidence across all years and cantons
+  // used as the maximum for the map colors and ranking bars
+  let globalMaxIncidence = 1;
 
   // empty arrays for the values
   // each array contains the values for each year
@@ -118,6 +118,14 @@ function Karte_FSME(p) {
       }
     }
 
+    // calculate the highest incidence across all years and cantons
+    globalMaxIncidence =
+      d3.max(
+        incidences.flatMap((yearData) =>
+          cantons.map((canton) => yearData[canton] || 0)
+        )
+      ) || 1;
+
     // draw after the data is loaded
     p.redraw();
   };
@@ -133,11 +141,6 @@ function Karte_FSME(p) {
 
     // set the default font for the sketch
     p.textFont(font);
-
-    //calculate the highest incidence for the selected year
-    // used as the maximum for the map colors and ranking bars
-    maxIncidence = d3.max(cantons, (canton) => incidences[currentYear][canton] || 0) || 1;
-
 
 
     drawYearLabels();
@@ -180,7 +183,7 @@ function Karte_FSME(p) {
       } else {
         // sqrt makes lower values easier to see instead of letting the highest value dominate the scale
         // AI help how I could fix my color problem the colors were too similar before
-        let colorAmount = Math.sqrt(incidenceValue / maxIncidence);
+        let colorAmount = Math.sqrt(incidenceValue / globalMaxIncidence);
 
         cantonColor = p.lerpColor(
           p.color(brightest),
@@ -322,7 +325,7 @@ function Karte_FSME(p) {
       barColor = p.lerpColor(
         p.color(brightest),
         p.color(darkest),
-        Math.sqrt(incidenceValue / maxIncidence),
+        Math.sqrt(incidenceValue / globalMaxIncidence),
       );
     }
 
@@ -481,7 +484,7 @@ function Karte_FSME(p) {
     p.fill(31, 41, 55);
     p.text("Top 5 Kantone", x, y + 20);
     p.textAlign(p.RIGHT);
-    p.text("Fälle", p.width, y + 20);
+    p.text("Fälle pro 100'000 Einwohner:innen", p.width, y + 20);
     p.textAlign(p.LEFT);
 
     // ranking bars
@@ -507,7 +510,7 @@ function Karte_FSME(p) {
       if (rankingItem.incidence === 0) {
         cantonColor = p.color(220);
       } else {
-        let colorAmount = Math.sqrt(rankingItem.incidence / maxIncidence);
+        let colorAmount = Math.sqrt(rankingItem.incidence / globalMaxIncidence);
 
         cantonColor = p.lerpColor(
           p.color(brightest),
@@ -518,7 +521,13 @@ function Karte_FSME(p) {
 
       p.fill(cantonColor);
 
-      let barWidth = p.map(rankingItem.incidence, 0, maxIncidence, 0, 300);
+      let barWidth = p.map(
+        rankingItem.incidence,
+        0,
+        globalMaxIncidence,
+        0,
+        300
+      );
 
       p.rect(x + 35, barY, barWidth, 20, 3);
 
@@ -526,7 +535,6 @@ function Karte_FSME(p) {
       p.fill(31, 41, 55);
       p.textAlign(p.RIGHT);
       p.textStyle(p.BOLD);
-      p.textSize(10);
       p.text(rankingItem.incidence.toFixed(1), p.width, barY + 10);
       p.textAlign(p.LEFT);
     }
