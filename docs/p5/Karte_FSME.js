@@ -425,6 +425,7 @@ function Karte_FSME(p) {
     }
 
     // legend labels
+    p.textSize(10);
     p.fill(170, 175, 190);
     p.textAlign(p.LEFT);
     p.text("Niedrigste", x, y + 15);
