@@ -39,7 +39,7 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--schriftfarbe-bag);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   margin-top: 1rem;
   line-height: 1.2;
 }
