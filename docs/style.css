@@ -834,5 +834,5 @@ a {
   height: 30px;
   color: var(--farbe-fsme);
   fill: currentColor;
-  animation: elastic-bounce 30s ease 3s infinite;
+  animation: elastic-bounce 15s ease 3s infinite;
 }
