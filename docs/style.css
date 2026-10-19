@@ -754,22 +754,7 @@ a {
   display: none;
 }
 
-.Zeckenbutton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0.5px solid transparent;
-  background-color: #ffffff00;
-  border-radius: 10px;
-  padding: 0;
-}
-
-.Zeckenbutton:hover {
-  transform: scale(1.05); /* Vergrößert den Button leicht beim Hover */
-  transition: transform 0.3s ease; /* Sanfte Animation beim Hover */
-}
-
-@keyframes elastic-bounce {
+@keyframes elastic-bounce-short {
   0%,
   16.67%,
   50%,
@@ -791,12 +776,38 @@ a {
   }
 }
 
-.lupe-img {
-  display: inline-block;
-  animation: elastic-bounce 3s ease infinite;
+@keyframes elastic-bounce {
+  0%,
+  1%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  0.33% {
+    transform: translateY(-18px) scale(0.95, 1.05);
+  }
+  0.55% {
+    transform: translateY(0) scale(1.08, 0.92);
+  }
+  0.72% {
+    transform: translateY(-6px) scale(0.98, 1.02);
+  }
+}
+
+.Zeckenbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: -4px 4px 10px 0 color-mix(in srgb, currentColor 5%, transparent);
+  padding: 5px;
 }
 
 .Zeckenbutton svg {
-  width: 130px;
-  height: 130px;
+  width: 30px;
+  height: 30px;
+  color: var(--farbe-fsme);
+  fill: currentColor;
+  animation: elastic-bounce 60s ease infinite;
 }
