@@ -162,7 +162,7 @@ function Radial_FSME(p) {
 
       // Beschriftung der Kreise
       p.noStroke();
-      p.fill(31, 41, 55);
+      p.fill(31,41,55);
       p.textAlign(p.CENTER, p.CENTER);
       p.text(abstand, 0, -radius - 5);
 
