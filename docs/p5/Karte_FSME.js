@@ -43,8 +43,11 @@ function Karte_FSME(p) {
   let brightest = [251, 207, 232];
   let darkest = [157, 23, 77];
 
+  // shared neutral gray for map borders and ranking backgrounds
+  let lightGray = [215, 223, 228];
+
   // color of the lines between cantons
-  let cantonBorderCol = [220, 220, 220];
+  let cantonBorderCol = lightGray;
 
   // highest incidence across all years and cantons
   // used as the maximum for the map colors and ranking bars
@@ -179,7 +182,7 @@ function Karte_FSME(p) {
       let cantonColor;
 
       if (incidenceValue === 0) {
-        cantonColor = p.color(220);
+        cantonColor = p.color(lightGray);
       } else {
         // sqrt makes lower values easier to see instead of letting the highest value dominate the scale
         // AI help how I could fix my color problem the colors were too similar before
@@ -274,11 +277,11 @@ function Karte_FSME(p) {
       let hintY = 1;
 
       p.fill(255);
-      p.stroke(220, 225, 228);
+      p.stroke(lightGray);
       p.strokeWeight(1);
       p.rect(hintX, hintY, p.width, 76, 3);
 
-      p.fill(220);
+      p.fill(lightGray);
       p.noStroke();
       p.rect(hintX, hintY, 4, 76, 3, 0, 0, 3);
 
@@ -313,14 +316,14 @@ function Karte_FSME(p) {
 
     // popup style (how it looks)
     p.fill(255);
-    p.stroke(220, 225, 228);
+    p.stroke(lightGray);
     p.strokeWeight(1);
     p.rect(x, y, bubbleWidth, bubbleHeight, 3);
 
     //colored bar on the left 
     let barColor;
     if (incidenceValue === 0) {
-      barColor = p.color(220);
+      barColor = p.color(lightGray);
     } else {
       barColor = p.lerpColor(
         p.color(brightest),
@@ -501,14 +504,14 @@ function Karte_FSME(p) {
       p.text(rankingItem.canton, x, barY + 12);
 
       // background bar for reference
-      p.fill(220, 229, 233);
+      p.fill(lightGray);
       p.rect(x + 35, barY, 300, 20, 3);
 
       // incidence bar - value
       let cantonColor;
 
       if (rankingItem.incidence === 0) {
-        cantonColor = p.color(220);
+        cantonColor = p.color(lightGray);
       } else {
         let colorAmount = Math.sqrt(rankingItem.incidence / globalMaxIncidence);
 
