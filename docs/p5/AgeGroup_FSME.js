@@ -108,7 +108,7 @@ function AgeGroup_FSME(p) {
 
     // Small markers under the slider, one for every year
     // (same as in the Karte: years with a label get a slightly longer marker)
-    p.stroke(170, 178, 185);
+    p.stroke(31, 41, 55);
     p.strokeWeight(1);
 
     for (let i = 0; i < years.length; i++) {
@@ -119,7 +119,7 @@ function AgeGroup_FSME(p) {
 
     // Slider labels
     p.noStroke();
-    p.fill(170, 175, 190);
+    p.fill(31, 41, 55);
     p.textStyle(p.NORMAL);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
@@ -166,7 +166,7 @@ function AgeGroup_FSME(p) {
       p.circle(centerX, centerY, circleSize);
 
       p.noStroke();
-      p.fill(100, 108, 120);
+      p.fill(31, 41, 55);
       p.textAlign(p.CENTER, p.CENTER);
       p.textStyle(p.BOLD);
       p.textSize(11);
@@ -305,7 +305,7 @@ function AgeGroup_FSME(p) {
     }
 
     // Legend labels
-    p.fill(125, 132, 145);
+    p.fill(31, 41, 55);
     p.textAlign(p.LEFT, p.CENTER);
     p.text("Niedrigste", x, y + 15);
 
@@ -320,7 +320,7 @@ function AgeGroup_FSME(p) {
 
     // Explains what the numbers mean
     p.noStroke();
-    p.fill(100, 108, 120);
+    p.fill(31, 41, 55);
     p.textAlign(p.CENTER, p.CENTER);
     p.textStyle(p.NORMAL);
     p.textSize(10);

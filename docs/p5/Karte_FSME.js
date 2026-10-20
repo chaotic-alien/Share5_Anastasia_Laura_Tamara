@@ -236,7 +236,7 @@ function Karte_FSME(p) {
   function drawYearLabels() {
     // small markers under the slider, one for every year
     // years with a label get a slightly longer marker
-    p.stroke(170, 178, 185);
+    p.stroke(31, 41, 55);
     p.strokeWeight(1);
 
     for (let i = 0; i < years.length; i++) {
@@ -246,7 +246,7 @@ function Karte_FSME(p) {
     }
 
     p.noStroke();
-    p.fill(170, 175, 190);
+    p.fill(31, 41, 55);
     p.textStyle(p.NORMAL);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
@@ -291,7 +291,7 @@ function Karte_FSME(p) {
       p.textSize(16);
       p.text("Kanton auswählen", hintX + 16, hintY + 30);
 
-      p.fill(170, 175, 190);
+      p.fill(31, 41, 55);
       p.textStyle(p.NORMAL);
       p.textSize(10);
       p.text("Klicke auf einen Kanton.", hintX + 16, hintY + 54);
@@ -367,7 +367,7 @@ function Karte_FSME(p) {
     // cases and population in pop up rounded so it's easier for laien
     let casesText = Math.round(cantonCases) + " Fälle";
 
-    p.fill(170, 175, 190);
+    p.fill(31, 41, 55);
     p.textStyle(p.NORMAL);
     p.textSize(10);
     p.text(casesText, x + 16, y + 65);
@@ -375,7 +375,7 @@ function Karte_FSME(p) {
     p.textSize(10);
     let casesWidth = p.textWidth(casesText);
 
-    p.fill(170, 175, 190);
+    p.fill(31, 41, 55);
     p.textStyle(p.NORMAL);
     p.text(
       " bei " +
@@ -408,7 +408,7 @@ function Karte_FSME(p) {
 
     p.textSize(10);
     p.textStyle(p.NORMAL);
-    p.fill(80);
+    p.fill(31, 41, 55);
     p.noStroke();
 
     // color steps
@@ -432,7 +432,7 @@ function Karte_FSME(p) {
 
     // legend labels
     p.textSize(10);
-    p.fill(170, 175, 190);
+    p.fill(31, 41, 55);
     p.textAlign(p.LEFT);
     p.text("Niedrigste", x, y + 15);
 
